@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offer & Acceptance – 50 Questions (Timed 20 min)</title>
+<title>Offer & Acceptance – 50 Hard Questions (Timed 20 min)</title>
 <style>
   :root {
     --primary: #1a365d;
@@ -93,16 +93,6 @@
   }
   .options label:hover { background: #edf2f7; }
   .options input { margin-top: 0.25rem; flex-shrink: 0; }
-  .feedback {
-    margin-top: 0.75rem;
-    padding: 0.7rem 1rem;
-    border-radius: 8px;
-    font-size: 0.92rem;
-    display: none;
-  }
-  .feedback.show { display: block; }
-  .feedback.correct { background: #c6f6d5; color: var(--success); border-left: 4px solid var(--success); }
-  .feedback.wrong { background: #fed7d7; color: var(--danger); border-left: 4px solid var(--danger); }
   #score-box {
     text-align: center;
     font-size: 1.35rem;
@@ -171,6 +161,60 @@
     color: #c53030;
     font-weight: 600;
   }
+  /* Review Section Styles */
+  .review-item {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+    background: #fafafa;
+  }
+  .review-item.correct {
+    border-left: 6px solid var(--success);
+    background: #f0fff4;
+  }
+  .review-item.wrong {
+    border-left: 6px solid var(--danger);
+    background: #fff5f5;
+  }
+  .review-item.unanswered {
+    border-left: 6px solid #a0aec0;
+    background: #f7fafc;
+  }
+  .review-q {
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    font-size: 1.02rem;
+  }
+  .review-answer {
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+  }
+  .review-answer strong {
+    display: inline-block;
+    min-width: 130px;
+  }
+  .your-answer { color: #2d3748; }
+  .correct-answer { color: var(--success); }
+  .explanation {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    background: white;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    border: 1px solid #e2e8f0;
+  }
+  .status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+  .badge-correct { background: #c6f6d5; color: var(--success); }
+  .badge-wrong { background: #fed7d7; color: var(--danger); }
+  .badge-unanswered { background: #e2e8f0; color: #4a5568; }
   @media (max-width: 600px) {
     body { padding: 0.6rem; }
     h1 { font-size: 1.3rem; }
@@ -184,7 +228,7 @@
 <div class="container">
   <header>
     <h1>Offer & Acceptance</h1>
-    <p class="subtitle">50 Multiple-Choice Questions · Timed (20 minutes max)<br>
+    <p class="subtitle">50 Hard Multiple-Choice Questions · Timed (20 minutes max)<br>
     Based on Dowuona-Hammond (2011), Chapter 2</p>
   </header>
 
@@ -231,7 +275,11 @@
     <p id="result-name" style="text-align:center;font-size:1.1rem;margin-bottom:0.5rem;"></p>
     <p id="time-info" style="text-align:center;color:#718096;margin-bottom:1rem;"></p>
     <div id="score-box"></div>
-    <div id="detailed-feedback" style="max-height:55vh;overflow-y:auto;"></div>
+
+    <h3 style="margin: 2rem 0 1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;">
+      Detailed Review
+    </h3>
+    <div id="review-container"></div>
   </div>
 </div>
 
@@ -243,7 +291,7 @@ let quizSubmitted = false;
 let studentName = "";
 let startTime = null;
 
-const STORAGE_KEY = "offer_acceptance_quiz_result_v1";
+const STORAGE_KEY = "offer_acceptance_quiz_result_v2";
 
 function checkIfAlreadyTaken() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -625,7 +673,6 @@ function renderQuestions() {
           </label>
         `).join('')}
       </div>
-      <div class="feedback" id="feedback-${i}"></div>
     `;
     container.appendChild(div);
   });
@@ -650,23 +697,39 @@ function gradeQuiz(auto = false) {
   document.getElementById('submit-btn').disabled = true;
 
   let score = 0;
+  const reviewHTML = [];
+
   questions.forEach((q, i) => {
     const selected = document.querySelector(`input[name="q${i}"]:checked`);
-    const feedbackEl = document.getElementById(`feedback-${i}`);
-    if (!selected) {
-      feedbackEl.className = 'feedback show wrong';
-      feedbackEl.innerHTML = `<strong>No answer selected.</strong><br>${q.explanation}`;
-      return;
-    }
-    const chosen = parseInt(selected.value);
-    if (chosen === q.answer) {
-      score++;
-      feedbackEl.className = 'feedback show correct';
-      feedbackEl.innerHTML = `<strong>✓ Correct.</strong><br>${q.explanation}`;
-    } else {
-      feedbackEl.className = 'feedback show wrong';
-      feedbackEl.innerHTML = `<strong>✗ Incorrect.</strong> Correct answer: <em>${q.options[q.answer]}</em><br>${q.explanation}`;
-    }
+    const chosenIndex = selected ? parseInt(selected.value) : null;
+    const isCorrect = chosenIndex === q.answer;
+    const isUnanswered = chosenIndex === null;
+
+    if (isCorrect) score++;
+
+    let statusClass = isUnanswered ? 'unanswered' : (isCorrect ? 'correct' : 'wrong');
+    let badgeClass = isUnanswered ? 'badge-unanswered' : (isCorrect ? 'badge-correct' : 'badge-wrong');
+    let badgeText = isUnanswered ? 'Not Answered' : (isCorrect ? 'Correct' : 'Incorrect');
+
+    const yourAnswerText = isUnanswered 
+      ? '<em>No answer selected</em>' 
+      : q.options[chosenIndex];
+
+    reviewHTML.push(`
+      <div class="review-item ${statusClass}">
+        <div class="status-badge ${badgeClass}">${badgeText}</div>
+        <div class="review-q">Q${i + 1}. ${q.q}</div>
+        <div class="review-answer your-answer">
+          <strong>Your answer:</strong> ${yourAnswerText}
+        </div>
+        <div class="review-answer correct-answer">
+          <strong>Correct answer:</strong> ${q.options[q.answer]}
+        </div>
+        <div class="explanation">
+          <strong>Explanation:</strong><br>${q.explanation}
+        </div>
+      </div>
+    `);
   });
 
   const elapsed = Math.floor((Date.now() - startTime) / 1000);
@@ -675,7 +738,7 @@ function gradeQuiz(auto = false) {
   const timeUsed = `${elapsedMin}m ${elapsedSec}s`;
   const percentage = Math.round((score / questions.length) * 100);
 
-  // Save result permanently
+  // Save result
   const resultData = {
     name: studentName,
     score: score,
@@ -685,6 +748,7 @@ function gradeQuiz(auto = false) {
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(resultData));
 
+  // Show results
   document.getElementById('quiz-section').classList.remove('active');
   document.getElementById('result-section').classList.add('active');
   document.getElementById('result-name').textContent = `Student: ${studentName}`;
@@ -710,6 +774,9 @@ function gradeQuiz(auto = false) {
   }
   scoreBox.className = gradeClass;
   scoreBox.innerHTML = `${score} / ${questions.length} (${percentage}%)<br><span style="font-size:1rem;font-weight:500;">${comment}</span>`;
+
+  // Inject the full review
+  document.getElementById('review-container').innerHTML = reviewHTML.join('');
 }
 
 // Initialize
