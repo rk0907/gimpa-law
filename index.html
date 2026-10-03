@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Offer & Acceptance – 50  Questions (Timed 20 min)</title>
+<title>Offer & Acceptance – 50 Questions (Timed 20 min)</title>
 <style>
   :root {
     --primary: #1a365d;
@@ -243,9 +243,8 @@ let quizSubmitted = false;
 let studentName = "";
 let startTime = null;
 
-const STORAGE_KEY = "offer_acceptance_quiz_result";
+const STORAGE_KEY = "offer_acceptance_quiz_result_v1";
 
-// ========== CHECK IF ALREADY TAKEN ==========
 function checkIfAlreadyTaken() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
@@ -262,14 +261,308 @@ function checkIfAlreadyTaken() {
   return false;
 }
 
-// ========== QUESTIONS (same as before) ==========
 const questions = [
-  // ... (keep the full 50 questions exactly as in the previous version)
-  // For brevity I'm not repeating all 50 here, but you should paste the full array
+  {
+    q: "According to the Supreme Court in NTHC Ltd v. Antwi [2009] SCGLR 117, what is the essential characteristic that distinguishes a true contractual offer from an invitation to treat?",
+    options: ["The presence of a price term", "Finality – the capacity of the offeree to transform the proposal into a contract by mere communication of assent", "The fact that it is made in writing", "That it is addressed to a specific person rather than the world at large"],
+    answer: 1,
+    explanation: "The Supreme Court emphasised that an invitation to treat lacks the finality of an offer. An offer must be definite and final so that the offeree can convert it into a contract by simple acceptance."
+  },
+  {
+    q: "In Pharmaceutical Society of Great Britain v. Boots Cash Chemist, at what precise moment did the Court of Appeal hold that the contract of sale was concluded in a self-service pharmacy?",
+    options: ["When the customer selected the item and placed it in the basket", "When the customer took the item from the shelf", "When the customer’s offer to buy was accepted by the acceptance of the purchase price at the cash desk under the supervision of the registered pharmacist", "When the customer entered the shop and was handed a basket"],
+    answer: 2,
+    explanation: "The Court held that the display was only an invitation to treat. The customer makes the offer by presenting the goods at the cash desk; acceptance occurs when the shop accepts the money."
+  },
+  {
+    q: "Which of the following statements about tender notices is correct according to Spencer v. Harding and Great Northern Railway v. Witham?",
+    options: ["A notice inviting tenders is itself a contractual offer accepted by the highest/lowest tender", "Acceptance of a tender always creates an immediately binding bilateral contract for a fixed quantity", "Where the invitation contains no definite promise to buy any specified quantity, the tender constitutes a standing offer converted into contracts by subsequent orders", "A tender notice is always an offer because it is made with the intention to be bound"],
+    answer: 2,
+    explanation: "A tender notice is an invitation to treat. The tender itself is the offer. If there is no firm commitment to purchase a definite quantity, it is a standing offer capable of recurrent acceptance by individual orders."
+  },
+  {
+    q: "In Carlill v. Carbolic Smoke Ball Co, how did the Court of Appeal answer the argument that one cannot contract with the whole world?",
+    options: ["The advertisement was merely an invitation to treat", "The offer was made to the whole world but the contract was made only with that limited portion of the public who performed the conditions on the faith of the advertisement", "An offer to the world at large is automatically void for uncertainty", "Only offers made to specific named individuals can create unilateral contracts"],
+    answer: 1,
+    explanation: "Although the offer is made to the world, the contract is made only with those who come forward and perform the conditions."
+  },
+  {
+    q: "According to the text, when does performance of the stipulated act in a unilateral (general) offer amount to effective acceptance?",
+    options: ["Always, even if the performer was unaware of the offer", "Only if the performer knew of the offer at the time of performance so that the act is done in response to the offer", "Only if the offeror has expressly waived the requirement of knowledge", "Knowledge is irrelevant; objective correspondence of the act is sufficient"],
+    answer: 1,
+    explanation: "Acceptance must be made with knowledge of, and in response to, the offer. Performance in ignorance cannot constitute acceptance (see Gibbons v. Proctor and the cross-offers principle in Tinn v. Hoffman)."
+  },
+  {
+    q: "In Hyde v. Wrench the plaintiff, having offered a lower price which was rejected, later purported to accept the original offer. What was the legal effect of the intermediate lower offer?",
+    options: ["It was a mere inquiry that left the original offer open", "It was a counter-offer that destroyed the original offer so that it could no longer be accepted", "It suspended the original offer until the counter-offer was rejected", "It created an option contract binding the defendant"],
+    answer: 1,
+    explanation: "A counter-offer operates as a rejection of the original offer and extinguishes it. The same principle was applied in Deegbe v. Nsiah & Antonnelli."
+  },
+  {
+    q: "Under the Auction Sales Law, 1989 (P.N.D.C.L. 230) and the common-law principles restated in the text, which of the following is true of an auction advertised as ‘without reserve’?",
+    options: ["The auctioneer may still refuse the highest bid if it is commercially unreasonable", "The highest bona fide bidder is entitled to the goods at the price bid whether or not the auctioneer accepts the bid; neither the owner nor his agent may bid", "The owner may bid once openly at the beginning of the sale", "The notice of the auction itself constitutes a contractual offer to sell to the highest bidder"],
+    answer: 1,
+    explanation: "In a ‘without reserve’ sale the highest bona fide bidder has a contractual right to the goods; the owner/agent is prohibited from bidding (codifying Warlow v. Harrison)."
+  },
+  {
+    q: "In Brogden v. Metropolitan Railway Co the draft agreement was never formally executed. On what basis did the House of Lords hold that a binding contract nevertheless existed?",
+    options: ["Silence after receipt of the draft amounted to acceptance", "The subsequent conduct of the parties in ordering and supplying coal on the terms of the draft constituted acceptance by conduct", "The insertion of the arbitrator’s name by Brogden was itself acceptance", "The parties were already in a continuous contractual relationship that needed no formal acceptance"],
+    answer: 1,
+    explanation: "Keeping the document in a drawer was not acceptance, but the subsequent course of dealing could only be explained on the basis that both parties had agreed to those terms."
+  },
+  {
+    q: "Which of the following best captures the distinction drawn in Stevenson, Jacques & Co v. McLean between a counter-offer and a mere inquiry?",
+    options: ["Any response that mentions price is automatically a counter-offer", "A request for information about delivery or payment terms that does not introduce new terms leaves the original offer intact", "All telegrams are treated as counter-offers because of their abrupt style", "An inquiry automatically converts the original offer into an invitation to treat"],
+    answer: 1,
+    explanation: "The plaintiffs’ telegram asking about delivery periods was held to be a mere request for information, not a counter-offer."
+  },
+  {
+    q: "In the Ghanaian case of Aidoo and Others v. Attorney-General the court held that a completed contract for the sale of the Kanda houses existed. Which feature of the government’s letter (Exhibit A) was decisive?",
+    options: ["It was written on official Ministry letterhead", "It stated a definite intention to sell at current replacement value and invited acceptance by completion and return of the attached forms", "It was addressed to an association rather than individuals", "It reserved the right to withdraw the offer at any time"],
+    answer: 1,
+    explanation: "Anterkyi J. read Exhibit A as a clear offer: ‘I offer to sell you the house at its current value… You may accept by filling in the attached forms…’"
+  },
+  {
+    q: "In Gibson v. Manchester City Council the House of Lords held that the Council’s letter stating ‘The Corporation may be prepared to sell…’ was:",
+    options: ["A firm contractual offer", "An invitation to treat because the wording lacked finality", "An acceptance of Gibson’s earlier application", "A unilateral contract"],
+    answer: 1,
+    explanation: "The wording ‘may be prepared’ and the statement that it should not be regarded as a firm offer showed lack of finality."
+  },
+  {
+    q: "According to Fisher v. Bell, the display of a flick knife in a shop window with a price ticket is:",
+    options: ["An offer to sell which is accepted when a customer asks for it", "An invitation to treat", "A unilateral offer to the world", "An offer that can be accepted by conduct"],
+    answer: 1,
+    explanation: "Ordinary contract principles treat shop-window displays as invitations to treat, not offers."
+  },
+  {
+    q: "In Perbi v. Attorney-General the Ghanaian court held that the hospital’s acceptance of the tender created a binding requirements contract because:",
+    options: ["The tender was a standing offer only", "The government had made a firm promise to purchase all its requirements of the specified items from the tenderer", "There was no need for consideration", "The contract was void for uncertainty"],
+    answer: 1,
+    explanation: "Unlike Great Northern Railway v. Witham, the terms showed a clear commitment to buy all requirements from the plaintiff."
+  },
+  {
+    q: "In Lefkowitz v. Great Minneapolis Surplus Stores the newspaper advertisement of fur coats for $1 ‘first come first served’ was held to be:",
+    options: ["An invitation to treat", "A contractual offer because it was clear, definite and left nothing open to negotiation", "Void for uncertainty", "A mere statement of intention"],
+    answer: 1,
+    explanation: "The advertisement was sufficiently definite and left nothing open to negotiation."
+  },
+  {
+    q: "According to Grainger & Son v. Gough, the circulation of a price list or catalogue is generally:",
+    options: ["A contractual offer to supply unlimited quantities", "An invitation to treat", "A unilateral offer", "An acceptance of any subsequent order"],
+    answer: 1,
+    explanation: "Otherwise the seller would be bound to supply every order even if stock was exhausted."
+  },
+  {
+    q: "In Harris v. Nickerson the auctioneer’s advertisement that certain goods would be sold on a particular day was held to be:",
+    options: ["A contractual offer to hold the auction", "A mere declaration of intention, not a binding contract", "A unilateral offer to the highest bidder", "An invitation that created liability if withdrawn"],
+    answer: 1,
+    explanation: "An auction notice is only a statement of intention; intending purchasers have no right of action if the auction is cancelled (absent fraud)."
+  },
+  {
+    q: "Under section 17 of the Auction Sales Law 1989, where a sale is subject to a reserve price and the highest bid is below the reserve:",
+    options: ["The highest bidder is still entitled to the goods", "The sale does not take effect and the highest bidder has no right of action", "The auctioneer is automatically liable for breach of warranty of authority", "The owner may not bid at all"],
+    answer: 1,
+    explanation: "The sale shall not take effect even if the property is knocked down; the highest bidder has no right of action (subject to the proviso about warranty of authority)."
+  },
+  {
+    q: "In a unilateral contract the acceptance consists of:",
+    options: ["A counter-promise", "The complete performance of the stipulated act", "Silence", "A written confirmation"],
+    answer: 1,
+    explanation: "Only the offeror makes a promise; the offeree accepts by performing the stipulated act."
+  },
+  {
+    q: "In Errington v. Errington the Court of Appeal held that once the couple began paying the instalments the father’s offer became irrevocable because:",
+    options: ["There was consideration for an option", "The court implied a collateral promise not to revoke once performance had begun", "Section 8(1) of Act 25 applied", "The couple had provided past consideration"],
+    answer: 1,
+    explanation: "Lord Denning implied a second promise that once the couple embarked on performance the offer would not be revoked."
+  },
+  {
+    q: "In Luxor (Eastbourne) Ltd v. Cooper the House of Lords refused to imply a term preventing revocation of a unilateral offer because:",
+    options: ["The transaction was perfectly workable without such a term", "There was no consideration", "The offer was not communicated", "The offeree had not started performance"],
+    answer: 0,
+    explanation: "The court held there was no room for implying a promise not to revoke; the commission was payable only on completion of the sale."
+  },
+  {
+    q: "The general rule is that acceptance has no effect unless and until it is communicated to the offeror. This was vividly illustrated in:",
+    options: ["Carlill v. Carbolic Smoke Ball Co", "Entores Ltd v. Miles Far East Corporation", "Hyde v. Wrench", "Fisher v. Bell"],
+    answer: 1,
+    explanation: "In Entores the Court of Appeal held that with instantaneous communications the contract is complete only when the acceptance is received by the offeror."
+  },
+  {
+    q: "In Fofie v. Zanyo the Supreme Court of Ghana held that a mere mental acceptance is insufficient because:",
+    options: ["Acceptance must be in writing", "There must be positive evidence by words, writing or conduct from which acceptance can be inferred, and the acceptance must be communicated", "The offer prescribed a particular method", "Silence always amounts to acceptance"],
+    answer: 1,
+    explanation: "The Court required both an outward manifestation and communication to the offeror."
+  },
+  {
+    q: "In Powell v. Lee the purported acceptance was ineffective because:",
+    options: ["It was made by post", "It was communicated by an unauthorised person (one of the managers acting without authority)", "It was made after revocation", "It was a counter-offer"],
+    answer: 1,
+    explanation: "Acceptance must come from the offeree or his authorised agent."
+  },
+  {
+    q: "According to Bowen LJ in Carlill, the requirement of communication of acceptance may be waived:",
+    options: ["Only by express words", "Expressly or impliedly, especially in unilateral offers where performance of the condition is itself acceptance", "Never", "Only by statute"],
+    answer: 1,
+    explanation: "In advertisement cases notification is dispensed with; performance of the condition is sufficient acceptance."
+  },
+  {
+    q: "The postal rule (Adams v. Lindsell) states that acceptance by post is complete when:",
+    options: ["The letter is received by the offeror", "The letter is properly addressed and posted", "The letter is opened by the offeror", "A reasonable time has elapsed"],
+    answer: 1,
+    explanation: "Acceptance is complete upon posting (provided it is properly addressed)."
+  },
+  {
+    q: "In Household Fire and Carriage Accident Insurance Co v. Grant the letter of allotment never arrived. The court held:",
+    options: ["There was no contract because acceptance must be received", "The acceptance was effective upon posting; the loss of the letter was irrelevant", "The postal rule does not apply to share allotments", "The company was estopped"],
+    answer: 1,
+    explanation: "The postal rule applies even if the letter is delayed or never arrives."
+  },
+  {
+    q: "In Holwell Securities Ltd v. Hughes the postal rule was held not to apply because:",
+    options: ["The letter was lost", "The option required ‘notice in writing to the defendant’, which implied actual communication", "The parties were in the same town", "The offer was made by telephone"],
+    answer: 1,
+    explanation: "The word ‘notice’ required the information to be brought to the actual attention of the vendor."
+  },
+  {
+    q: "The postal rule does NOT apply to:",
+    options: ["Letters of acceptance", "Acceptances by telephone, telex, fax or other instantaneous methods", "Acceptances by telegram", "Acceptances where the offer was made by post"],
+    answer: 1,
+    explanation: "Instantaneous communications are governed by the general rule that acceptance is effective only when received."
+  },
+  {
+    q: "Under sections 18 and 19 of the Electronic Transactions Act 2008 (Act 772), an electronic record is generally deemed received when:",
+    options: ["It is read by the addressee", "It enters the designated information system of the addressee (or an information system of the addressee if none is designated)", "It is sent by the originator", "A reasonable time has elapsed"],
+    answer: 1,
+    explanation: "Receipt occurs when the record enters the designated system or, if none, a system of the addressee."
+  },
+  {
+    q: "In Financings Ltd v. Stimpson the court held that giving the hirer the car did not constitute acceptance because:",
+    options: ["The car was defective", "The terms of the offer required acceptance by the Finance Company’s signature of the agreement", "There was no consideration", "The offer had lapsed"],
+    answer: 1,
+    explanation: "Where a method of acceptance is prescribed and insisted upon, only that method will bind the offeror."
+  },
+  {
+    q: "Where the offeror prescribes a method of acceptance but does not insist that only that method will bind him, an acceptance by another method that is no less advantageous will generally be effective. This principle appears in:",
+    options: ["Felthouse v. Bindley", "Tinn v. Hoffman", "Byrne v. Van Tienhoven", "Dickinson v. Dodds"],
+    answer: 1,
+    explanation: "Acceptance requested ‘by return of post’ may be effected by any means no later than a letter by return of post."
+  },
+  {
+    q: "In Felthouse v. Bindley the court held that the nephew’s silence did not constitute acceptance because:",
+    options: ["Silence can never be acceptance", "An offeror cannot impose contractual liability on an offeree by stipulating that silence will be treated as acceptance", "The horse had already been sold", "There was no consideration"],
+    answer: 1,
+    explanation: "The offeror cannot by ultimatum impose on the offeree the burden of rejecting; silence is equivocal."
+  },
+  {
+    q: "Section 50 of the Electronic Transactions Act 2008 provides that an agreement shall not be deemed concluded where a consumer fails to respond to an unsolicited communication. This reinforces the principle in:",
+    options: ["Carlill v. Carbolic Smoke Ball Co", "Felthouse v. Bindley", "Adams v. Lindsell", "Entores v. Miles Far East"],
+    answer: 1,
+    explanation: "It prevents the imposition of contracts by silence in the electronic context."
+  },
+  {
+    q: "An offer may be terminated by rejection or counter-offer only if:",
+    options: ["The rejection is in writing", "The rejection or counter-offer is communicated to the offeror", "A reasonable time has elapsed", "The offeree changes his mind"],
+    answer: 1,
+    explanation: "Communication of the rejection/counter-offer is required to terminate the power of acceptance."
+  },
+  {
+    q: "Where no time limit is fixed for an offer, it lapses after:",
+    options: ["Seven days", "A reasonable time, depending on the nature of the transaction and surrounding circumstances", "One month", "The death of either party automatically"],
+    answer: 1,
+    explanation: "What is reasonable depends on factors such as price fluctuations, perishability, mode of communication and trade custom (see Aning v. Kingful)."
+  },
+  {
+    q: "At common law a promise to keep an offer open for a specified time (a firm offer) is not binding unless supported by consideration (Routledge v. Grant). This position has been altered in Ghana by:",
+    options: ["Section 8(1) of the Contracts Act 1960 (Act 25)", "Section 10 of Act 25", "The Sale of Goods Act 1962", "The Electronic Transactions Act 2008"],
+    answer: 0,
+    explanation: "Section 8(1) provides that a promise to keep an offer open for a specified time shall not be invalid merely for want of consideration."
+  },
+  {
+    q: "In Byrne & Co v. Leon Van Tienhoven the court held that a revocation sent by post takes effect only when:",
+    options: ["It is posted", "It is received by the offeree", "A reasonable time has elapsed", "The offeree reads it"],
+    answer: 1,
+    explanation: "Revocation must be actually communicated; the postal rule does not apply to revocations."
+  },
+  {
+    q: "In Dickinson v. Dodds the court held that the offer had been effectively revoked even though the communication came from a third party because:",
+    options: ["Any third-party information is sufficient", "The offeree had reliable knowledge that the offeror had sold the property to someone else", "The third party was the offeror’s agent", "The offer had lapsed by time"],
+    answer: 1,
+    explanation: "A person cannot accept an offer which he knows has been revoked; the source must be one a reasonable person would rely upon."
+  },
+  {
+    q: "A general offer made to the public (e.g. a reward advertisement) may be revoked by:",
+    options: ["Personal notice to every member of the public", "Publishing the revocation through the same channel by which the offer was made", "Silence for a reasonable time", "A private letter to the first person who starts performance"],
+    answer: 1,
+    explanation: "Publication through the same medium is sufficient (Shuey v. United States)."
+  },
+  {
+    q: "In the ‘battle of forms’ case Butler Machine Tool Co v. Ex-Cell-O Corporation the Court of Appeal held that the contract was concluded on the buyers’ terms because:",
+    options: ["The sellers’ price-escalation clause was unfair", "The sellers signed and returned the buyers’ acknowledgement slip, thereby accepting the buyers’ counter-offer", "The last shot always wins", "There was no contract at all"],
+    answer: 1,
+    explanation: "The buyers’ order was a counter-offer; the sellers’ return of the tear-off acknowledgement constituted acceptance of that counter-offer."
+  },
+  {
+    q: "In Domins Fisheries Ltd v. Bremen-Vegesacker-Fisheries the plaintiffs’ request for a moratorium on instalment payments was held to be:",
+    options: ["A counter-offer that destroyed the original offer", "A mere request for information that left the original offer open", "An acceptance subject to a condition precedent", "A revocation of the plaintiffs’ earlier acceptance"],
+    answer: 1,
+    explanation: "Abban J. treated the request as an inquiry rather than a counter-offer; the subsequent unconditional acceptance was therefore effective."
+  },
+  {
+    q: "According to the text, an offer may be made by:",
+    options: ["Words only", "Conduct only", "Words or conduct indicating a willingness to contract on stated or reasonably inferable terms with the intention that it will become binding on acceptance", "Silence"],
+    answer: 2,
+    explanation: "The definition given in NTHC Ltd v. Antwi and the general text covers both express and implied offers."
+  },
+  {
+    q: "In Asare v. Antwi the court applied the ordinary principles of offer and acceptance to an auction sale and held that:",
+    options: ["The auctioneer’s call for bids is itself an offer", "Each bid is an offer which the auctioneer may accept or reject", "The highest bidder always has a contract", "An auction without reserve creates a unilateral contract with every bidder"],
+    answer: 1,
+    explanation: "The auctioneer invites bids (invitation to treat); each bid is an offer."
+  },
+  {
+    q: "The principle that a counter-offer kills the original offer was applied in the Ghanaian case of:",
+    options: ["NTHC Ltd v. Antwi", "Deegbe v. Nsiah & Antonnelli", "Fofie v. Zanyo", "Perbi v. Attorney-General"],
+    answer: 1,
+    explanation: "The plaintiff’s letter asking for a serious reduction in price was treated as a counter-offer / invitation to make a fresh offer."
+  },
+  {
+    q: "Where an offer is made by instantaneous means (telephone, telex, fax), the contract is formed at the place where:",
+    options: ["The acceptance is spoken or typed", "The acceptance is received by the offeror", "The offer was made", "The parties last met"],
+    answer: 1,
+    explanation: "Entores established that the contract is complete only upon receipt of the acceptance."
+  },
+  {
+    q: "Section 8(1) of the Contracts Act 1960 (Act 25) makes a firm offer binding even without consideration. This means that in Ghana:",
+    options: ["An offeror who promises to keep an offer open for a stated period may still revoke it at will", "An offeror who promises to keep an offer open for a stated period is bound by that promise even if no consideration was given for it", "All offers are irrevocable", "Consideration is no longer required for any contract"],
+    answer: 1,
+    explanation: "The section expressly removes the common-law requirement of consideration for firm offers."
+  },
+  {
+    q: "In the battle of forms, if the seller’s final communication specifically re-asserts the seller’s own terms (including a price-escalation clause) after receiving the buyer’s order, the legal effect is usually:",
+    options: ["The seller’s terms prevail under the ‘last shot’ doctrine", "No contract is concluded because there is no matching acceptance", "The buyer’s terms still prevail", "The court will invent reasonable terms"],
+    answer: 1,
+    explanation: "A specific re-assertion of conflicting terms constitutes a further counter-offer; without acceptance there is no contract."
+  },
+  {
+    q: "According to the text, cross-offers (identical offers that cross in the post) do not create a contract because:",
+    options: ["There is no consideration", "Neither party knows of the other’s offer at the time of making his own; acceptance must be made with reference to a previous offer", "They are invitations to treat", "The postal rule does not apply"],
+    answer: 1,
+    explanation: "Tinn v. Hoffman established that cross-offers are not acceptances of each other."
+  },
+  {
+    q: "In an auction sale subject to reserve, if the auctioneer accidentally knocks the goods down to a bidder whose bid is below the reserve price, the highest bidder:",
+    options: ["Is entitled to the goods", "Has no right of action against the owner, but may have a claim against the auctioneer for breach of warranty of authority if the auctioneer signed a memorandum", "Can force the auctioneer to complete the sale", "Automatically becomes the owner"],
+    answer: 1,
+    explanation: "The sale does not take effect; the proviso in the Auction Sales Law protects the bidder only against the auctioneer’s lack of authority."
+  },
+  {
+    q: "The overall analytical approach recommended by the text for determining whether agreement has been reached is:",
+    options: ["To look only for a formal signed document", "To conduct a meticulous examination of all statements, correspondence and conduct to see whether a definite offer has been clearly accepted", "To apply the subjective intentions of the parties", "To presume agreement whenever goods have been delivered"],
+    answer: 1,
+    explanation: "The courts examine the entire course of negotiation to ascertain whether a definite offer was made and clearly accepted (illustrated by Gibson, Aidoo, NTHC, etc.)."
+  }
 ];
-
-// Paste the full questions array from the previous message here
-// (I'm omitting it only to keep this response readable)
 
 function startQuiz() {
   if (checkIfAlreadyTaken()) return;
@@ -382,7 +675,7 @@ function gradeQuiz(auto = false) {
   const timeUsed = `${elapsedMin}m ${elapsedSec}s`;
   const percentage = Math.round((score / questions.length) * 100);
 
-  // ========== SAVE RESULT TO LOCAL STORAGE ==========
+  // Save result permanently
   const resultData = {
     name: studentName,
     score: score,
@@ -392,7 +685,6 @@ function gradeQuiz(auto = false) {
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(resultData));
 
-  // Show results
   document.getElementById('quiz-section').classList.remove('active');
   document.getElementById('result-section').classList.add('active');
   document.getElementById('result-name').textContent = `Student: ${studentName}`;
@@ -420,7 +712,7 @@ function gradeQuiz(auto = false) {
   scoreBox.innerHTML = `${score} / ${questions.length} (${percentage}%)<br><span style="font-size:1rem;font-weight:500;">${comment}</span>`;
 }
 
-// ========== INITIALIZE ==========
+// Initialize
 window.onload = function() {
   if (!checkIfAlreadyTaken()) {
     document.getElementById('name-section').classList.add('active');
