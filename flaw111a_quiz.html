@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FLAW 111A | Legal Writing & Research — Mastery Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface2: #f7f7f8;
+      --border: #e8e8ea;
+      --border-strong: #d4d4d8;
+      --text: #111111;
+      --muted: #6b6b76;
+      --muted2: #9a9aa3;
+      --accent: #111111;
+      --accent-hover: #000000;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --gold: #ca8a04;
+      --purple: #7c3aed;
+      --cyan: #0891b2;
+      --pink: #db2777;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-pill: 999px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+      --shadow-hover: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* subtle grid like onlines */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, #e5e5e8 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: 0;
+    }
+    h1, h2, h3 {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+    .logo {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .logo span { font-weight: 500; color: var(--muted); }
+    .stats-bar {
+      display: flex;
+      gap: 1.1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .stat { display: flex; align-items: center; gap: 0.3rem; }
+    .stat strong { color: var(--text); font-weight: 600; }
+
+    /* Screens */
+    .screen { display: none; animation: fadeIn 0.3s ease; }
+    .screen.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    /* Home */
+    .hero {
+      text-align: center;
+      padding: 3.5rem 0 2rem;
+    }
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .level-badge .xp { color: var(--gold); font-weight: 600; }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .hero p {
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 2.25rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .mode-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.35rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: left;
+      box-shadow: var(--shadow);
+    }
+    .mode-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    .mode-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+      font-weight: 650;
+    }
+    .mode-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .mode-card .tag {
+      display: inline-block;
+      margin-top: 0.9rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: #f0f0f2;
+      color: var(--muted);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-pill);
+    }
+
+    .section-list { margin-top: 0.5rem; }
+    .section-list h2 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted2);
+      margin-bottom: 0.85rem;
+    }
+    .section-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.95rem 1.15rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: left;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow);
+    }
+    .section-btn:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-hover);
+    }
+    .section-btn .count {
+      color: var(--muted2);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    /* Quiz */
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .progress-wrap { flex: 1; min-width: 180px; }
+    .progress-bar {
+      height: 6px;
+      background: var(--surface2);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--text);
+      border-radius: var(--radius-pill);
+      transition: width 0.35s ease;
+    }
+    .progress-text {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+      font-weight: 500;
+    }
+
+    .q-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.6rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+    .q-meta {
+      display: flex;
+      gap: 0.45rem;
+      margin-bottom: 1.15rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.28rem 0.65rem;
+      border-radius: var(--radius-pill);
+    }
+    .badge.type { background: #f3e8ff; color: var(--purple); }
+    .badge.section { background: #e0f2fe; color: var(--cyan); }
+    .badge.num { background: var(--surface2); color: var(--muted); }
+
+    .q-text {
+      font-size: 1.2rem;
+      font-weight: 550;
+      margin-bottom: 1.4rem;
+      line-height: 1.5;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }
+
+    .options { display: flex; flex-direction: column; gap: 0.55rem; }
+    .opt {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.95rem 1.1rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 450;
+      color: var(--text);
+    }
+    .opt:hover:not(.disabled) {
+      border-color: var(--border-strong);
+      background: #f0f0f2;
+    }
+    .opt.selected {
+      border-color: var(--text);
+      background: #f4f4f5;
+      box-shadow: 0 0 0 1px var(--text);
+    }
+    .opt.correct {
+      border-color: var(--success);
+      background: #f0fdf4;
+      box-shadow: 0 0 0 1px var(--success);
+    }
+    .opt.wrong {
+      border-color: var(--danger);
+      background: #fef2f2;
+      box-shadow: 0 0 0 1px var(--danger);
+    }
+    .opt.disabled { cursor: default; opacity: 0.9; }
+
+    .fill-wrap { margin-top: 0.25rem; }
+    .fill-input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.95rem 1.1rem;
+      color: var(--text);
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .fill-input:focus {
+      border-color: var(--text);
+      box-shadow: 0 0 0 1px var(--text);
+    }
+    .fill-input.correct {
+      border-color: var(--success);
+      background: #f0fdf4;
+    }
+    .fill-input.wrong {
+      border-color: var(--danger);
+      background: #fef2f2;
+    }
+
+    .feedback {
+      margin-top: 1.1rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: none;
+    }
+    .feedback.show { display: block; }
+    .feedback.ok {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+    }
+    .feedback.bad {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+    }
+    .feedback .ans {
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+    .btn {
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 0.75rem 1.45rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: var(--text);
+      color: white;
+    }
+    .btn-primary:hover { background: #000; }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--border-strong);
+      color: var(--text);
+    }
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+    .btn-success:hover { background: #15803d; }
+
+    /* Results */
+    .results-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.75rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      margin-top: 2rem;
+    }
+    .results-card h2 {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+    .score-big {
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin: 0.4rem 0;
+    }
+    .score-label {
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+    .xp-gain {
+      font-size: 1.05rem;
+      color: var(--success);
+      font-weight: 600;
+      margin-bottom: 1.75rem;
+    }
+    .results-actions {
+      display: flex;
+      gap: 0.65rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 1.75rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--text);
+      color: white;
+      padding: 0.75rem 1.35rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: transform 0.3s ease;
+      z-index: 100;
+      white-space: nowrap;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      color: var(--muted2);
+      font-size: 0.78rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    #timer {
+      font-variant-numeric: tabular-nums;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.7rem; }
+      .stats-bar { gap: 0.7rem; font-size: 0.72rem; }
+      .q-text { font-size: 1.05rem; }
+      .q-card { padding: 1.35rem 1.15rem; }
+      .mode-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">FLAW <span>111A</span></div>
+      <div class="stats-bar">
+        <div class="stat">🔥 <strong id="streak">0</strong></div>
+        <div class="stat">⭐ <strong id="xp">0</strong> XP</div>
+        <div class="stat">🎯 <strong id="accuracy">—</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div class="level-badge">
+          <span id="rank-label">Novice Advocate</span>
+          <span class="xp">• <span id="xp-home">0</span> XP</span>
+        </div>
+        <h1>Legal Writing<br>&amp; Research I</h1>
+        <p>Ratio decidendi · Abstraction ladder · IRAC / CREAC · Samuelson · Painter · Orwell</p>
+      </div>
+
+      <div class="mode-grid">
+        <div class="mode-card" onclick="startMode('quick')">
+          <h3>Quick Drill</h3>
+          <p>20 random auto-gradable questions. Perfect warm-up.</p>
+          <span class="tag">~10 min</span>
+        </div>
+        <div class="mode-card" onclick="startMode('exam')">
+          <h3>Exam Simulation</h3>
+          <p>40 mixed questions under light time pressure.</p>
+          <span class="tag">Timed</span>
+        </div>
+        <div class="mode-card" onclick="startMode('weak')">
+          <h3>Weak Spots</h3>
+          <p>Revisit questions you previously missed.</p>
+          <span class="tag">Adaptive</span>
+        </div>
+        <div class="mode-card" onclick="startMode('full')">
+          <h3>Full Challenge</h3>
+          <p>All auto-gradable items in random order.</p>
+          <span class="tag">Marathon</span>
+        </div>
+      </div>
+
+      <div class="section-list">
+        <h2>Practice by Section</h2>
+        <button class="section-btn" onclick="startSection('A')">
+          <span>A — Ratio Decidendi &amp; Stare Decisis</span>
+          <span class="count">Q1–80</span>
+        </button>
+        <button class="section-btn" onclick="startSection('B')">
+          <span>B — Anatomy of a Reported Case &amp; Headnotes</span>
+          <span class="count">Q81–110</span>
+        </button>
+        <button class="section-btn" onclick="startSection('C')">
+          <span>C — Glanville Williams’ Abstraction Ladder</span>
+          <span class="count">Q111–200</span>
+        </button>
+        <button class="section-btn" onclick="startSection('D')">
+          <span>D — Wambaugh, Goodhart &amp; Stone</span>
+          <span class="count">Q201–250</span>
+        </button>
+        <button class="section-btn" onclick="startSection('E')">
+          <span>E — Obiter, Per Incuriam &amp; Classification</span>
+          <span class="count">Q251–320</span>
+        </button>
+        <button class="section-btn" onclick="startSection('F')">
+          <span>F — Fundamentals of Good Legal Writing</span>
+          <span class="count">Q321–400</span>
+        </button>
+        <button class="section-btn" onclick="startSection('G')">
+          <span>G — Paragraphs, Topic Sentences, CREAC/IRAC</span>
+          <span class="count">Q401–430</span>
+        </button>
+        <button class="section-btn" onclick="startSection('H')">
+          <span>H — Scenario &amp; Essay Technique</span>
+          <span class="count">Q431–470</span>
+        </button>
+        <button class="section-btn" onclick="startSection('I')">
+          <span>I — Application, Mixed &amp; Synthesis</span>
+          <span class="count">Q471–500</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="screen">
+      <div class="quiz-header">
+        <div class="progress-wrap">
+          <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+          <div class="progress-text"><span id="prog-text">0 / 0</span></div>
+        </div>
+        <div id="timer"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-meta">
+          <span class="badge num" id="q-num">Q1</span>
+          <span class="badge type" id="q-type">FILL-IN</span>
+          <span class="badge section" id="q-sec">Section A</span>
+        </div>
+        <div class="q-text" id="q-text">Loading…</div>
+        <div id="q-body"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="actions">
+          <button class="btn btn-primary" id="btn-check" onclick="checkAnswer()">Check</button>
+          <button class="btn btn-success" id="btn-next" style="display:none" onclick="nextQuestion()">Next →</button>
+          <button class="btn btn-ghost" onclick="endQuiz()">End Session</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="screen">
+      <div class="results-card">
+        <h2>Session Complete</h2>
+        <div class="score-big" id="final-score">0%</div>
+        <div class="score-label" id="final-detail">0 correct out of 0</div>
+        <div class="xp-gain" id="xp-gain">+0 XP</div>
+        <div class="results-actions">
+          <button class="btn btn-primary" onclick="showScreen('home')">Back to Home</button>
+          <button class="btn btn-ghost" onclick="retrySession()">Retry Same Set</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <footer>FLAW 111A · GIMPA Law School · Personal mastery tool · Progress saved locally</footer>
+
+  <script>
+    // ========== DATA ==========
+    const QUESTIONS = [
+      // SECTION A (1-80)
+      {id:1, sec:'A', type:'fill', q:'Ratio decidendi literally means “the __________ for deciding”.', a:['reason']},
+      {id:2, sec:'A', type:'fill', q:'The plural form of ratio decidendi is __________.', a:['rationes decidendi','rationes']},
+      {id:3, sec:'A', type:'fill', q:'Under the doctrine of __________ (“let the decision stand”), courts follow the ratios of higher courts.', a:['stare decisis']},
+      {id:4, sec:'A', type:'fill', q:'Article __________ of the 1992 Constitution of Ghana states that the Supreme Court may depart from its own previous decisions when it appears right to do so.', a:['129(3)','129']},
+      {id:5, sec:'A', type:'mcq', q:'The ratio is found primarily in which part of a judgment?', opts:['The headnote','The recital of facts','The reasoning on the issue the court actually had to decide','The final order only'], a:2},
+      {id:6, sec:'A', type:'tf', q:'The ratio is the same as the outcome (who won).', a:false},
+      {id:7, sec:'A', type:'fill', q:'Everything said in a judgment that is not the ratio is called __________ dictum.', a:['obiter']},
+      {id:8, sec:'A', type:'fill', q:'The Supreme Court of Ghana sits at the __________ of the court hierarchy.', a:['apex','top']},
+      {id:10, sec:'A', type:'fill', q:'Circuit and District Courts are bound by the decisions of the __________ courts above them.', a:['superior']},
+      {id:11, sec:'A', type:'mcq', q:'Which court may depart from its own previous decisions under Art. 129(3)?', opts:['High Court','Court of Appeal','Supreme Court','All superior courts'], a:2},
+      {id:12, sec:'A', type:'fill', q:'Judges do not underline the ratio. The student must __________ it.', a:['elicit','extract']},
+      {id:13, sec:'A', type:'tf', q:'There is always a single, undisputed “answer key” for the ratio of a case.', a:false},
+      {id:14, sec:'A', type:'fill', q:'In the Makola jollof recipe analogy, the essential cooking rule is the __________, while the colourful stories are __________.', a:['ratio; obiter','ratio, obiter']},
+      {id:16, sec:'A', type:'fill', q:'The ratio lives in the __________ on the issue the court HAD to decide.', a:['reasoning']},
+      {id:17, sec:'A', type:'tf', q:'A statement of law that the court did not need to resolve in order to decide the case is still ratio.', a:false},
+      {id:18, sec:'A', type:'fill', q:'Later courts often settle what an earlier case __________ for.', a:['stands']},
+      {id:19, sec:'A', type:'mcq', q:'The headnote is written by:', opts:['The judge','The law reporter or editor','Counsel for the parties','The registrar'], a:1},
+      {id:20, sec:'A', type:'fill', q:'Never cite the __________ as the ratio, and never copy it into your brief as the ratio.', a:['headnote']},
+      {id:22, sec:'A', type:'fill', q:'The ratio is the legal __________ the court used to reach its decision — the rule of law that emerges from the case.', a:['principle','rule']},
+      {id:23, sec:'A', type:'tf', q:'Discussion of issues the court did not need to resolve is still binding.', a:false},
+      {id:24, sec:'A', type:'fill', q:'Online legal repositories such as __________ are covered later in the course.', a:['GhaLII']},
+      {id:26, sec:'A', type:'fill', q:'Stare decisis is a Latin phrase meaning “let the decision __________”.', a:['stand']},
+      {id:27, sec:'A', type:'fill', q:'The Court of Appeal is bound by decisions of the __________ Court.', a:['Supreme']},
+      {id:28, sec:'A', type:'tf', q:'The High Court may freely depart from decisions of the Court of Appeal.', a:false},
+      {id:29, sec:'A', type:'fill', q:'Article 129(3) provides that all other courts are bound to follow the decisions of the Supreme Court on questions of __________.', a:['law']},
+      {id:30, sec:'A', type:'mcq', q:'Which of the following is NOT a reason the ratio is hard to find?', opts:['Judges do not always know their own ratio','The ratio hides in dull paragraphs','The headnote always states it clearly','Temporal and cultural context'], a:2},
+      {id:31, sec:'A', type:'fill', q:'Lord Atkin probably thought the neighbour principle was his ratio; it took __________ to settle what bound.', a:['decades']},
+      {id:32, sec:'A', type:'fill', q:'Some cases have __________ ratios (e.g. Donoghue arguably laid down both a narrow and a broad rule).', a:['multiple']},
+      {id:33, sec:'A', type:'tf', q:'Your brain often latches onto the first clear principle it sees — this is called the first-impression trap.', a:true},
+      {id:34, sec:'A', type:'fill', q:'Always read the __________ judgment first; highlighting comes later.', a:['whole','full']},
+      {id:36, sec:'A', type:'fill', q:'The ratio must be __________ — later courts and lawyers argue about what the case stands for.', a:['elicited']},
+      {id:38, sec:'A', type:'fill', q:'The doctrine of precedent declares that cases must be decided the same way when their __________ facts are the same.', a:['material']},
+      {id:39, sec:'A', type:'fill', q:'Not all facts need be the same; only the legally __________ facts need recur.', a:['material']},
+      {id:41, sec:'A', type:'fill', q:'The Supreme Court is the __________ court of Ghana.', a:['final','highest']},
+      {id:42, sec:'A', type:'tf', q:'Lower courts may refuse to follow a Supreme Court decision they disagree with.', a:false},
+      {id:43, sec:'A', type:'fill', q:'In the hierarchy, the High Court is bound by both the Supreme Court and the __________.', a:['Court of Appeal']},
+      {id:44, sec:'A', type:'mcq', q:'The binding part of a case is called the:', opts:['Obiter dictum','Ratio decidendi','Headnote','Catchwords'], a:1},
+      {id:45, sec:'A', type:'fill', q:'“This is the binding part!” — said no __________ ever.', a:['judge']},
+      {id:47, sec:'A', type:'fill', q:'The ratio is the one instruction you must follow every time, whatever else __________.', a:['changes']},
+      {id:48, sec:'A', type:'tf', q:'Colourful background stories in a judgment are usually ratio.', a:false},
+      {id:49, sec:'A', type:'fill', q:'Finding the ratio is an important part of the training of a __________.', a:['lawyer']},
+      {id:51, sec:'A', type:'fill', q:'The ratio is not the whole __________; it is the rule of law upon which the decision is founded.', a:['judgment']},
+      {id:52, sec:'A', type:'fill', q:'Glanville Williams notes that finding the ratio is not a mechanical process but an __________ gradually acquired through practice.', a:['art']},
+      {id:53, sec:'A', type:'tf', q:'All the facts of a case will never recur exactly; only the material facts may recur.', a:true},
+      {id:54, sec:'A', type:'fill', q:'Suppose facts A, B and C exist and the court finds B and C material and A immaterial, reaching conclusion X. In a future case with B and C, the conclusion must be __________.', a:['X']},
+      {id:55, sec:'A', type:'fill', q:'If a future case has A, B, C and D, and D is held material, the first case is not a direct __________ but may be of value as an analogy.', a:['authority']},
+      {id:57, sec:'A', type:'fill', q:'The fact that the defendant drove negligently and that the claimant was injured are __________ facts.', a:['material']},
+      {id:58, sec:'A', type:'tf', q:'The address at which a plaintiff lived is almost always a material fact for the ratio.', a:false},
+      {id:59, sec:'A', type:'fill', q:'The process of extracting the ratio involves boiling the case down to the __________ facts and the decision on those facts.', a:['material','essential']},
+      {id:61, sec:'A', type:'fill', q:'The ratio decidendi of a case can be defined as the material facts of the case plus the __________ thereon.', a:['decision']},
+      {id:62, sec:'A', type:'tf', q:'A case decided “sub silentio” (a point assumed but not argued) is always binding.', a:false},
+      {id:63, sec:'A', type:'fill', q:'When different judges in a composite court express different opinions, ascertaining the ratio becomes more __________.', a:['complicated']},
+      {id:64, sec:'A', type:'fill', q:'Where there is no majority for any single view, one approach is to add up the facts regarded as material by any group whose votes constitute a __________.', a:['majority']},
+      {id:66, sec:'A', type:'fill', q:'The Court of Appeal generally binds __________ (both civil and criminal sides).', a:['itself']},
+      {id:67, sec:'A', type:'tf', q:'The Court of Appeal can never refuse to follow one of its own previous decisions.', a:false},
+      {id:68, sec:'A', type:'fill', q:'One recognised exception is where the earlier decision was given __________ (by oversight).', a:['per incuriam']},
+      {id:69, sec:'A', type:'fill', q:'Another exception is where the earlier decision is inconsistent with a later decision of the __________ Court or House of Lords.', a:['Supreme']},
+      {id:70, sec:'A', type:'mcq', q:'A decision given per incuriam means the court:', opts:['Deliberately ignored binding authority','Acted through inadvertence or oversight','Issued an advisory opinion','Sat with an even number of judges'], a:1},
+      {id:71, sec:'A', type:'fill', q:'In Ghana, the ultimate court that can depart from its own previous decisions is the __________ Court.', a:['Supreme']},
+      {id:73, sec:'A', type:'fill', q:'The ratio is the rule of law that __________ future courts under stare decisis.', a:['binds']},
+      {id:74, sec:'A', type:'tf', q:'Obiter dicta are completely worthless and should never be cited.', a:false},
+      {id:75, sec:'A', type:'fill', q:'The weight of an obiter dictum depends on the __________ of the judge, the eminence of the court, and the circumstances in which it was pronounced.', a:['reputation']},
+      {id:77, sec:'A', type:'fill', q:'Restrictive distinguishing cuts down the expressed ratio by treating as material a fact the earlier court regarded as __________.', a:['immaterial']},
+      {id:78, sec:'A', type:'fill', q:'Non-restrictive distinguishing accepts the earlier ratio but finds a material difference of __________.', a:['fact']},
+      {id:79, sec:'A', type:'tf', q:'Distinguishing is an important part of legal argument and advocacy.', a:true},
+
+      // SECTION B
+      {id:81, sec:'B', type:'fill', q:'List the eight standard parts of a reported case: Title, Citation, Court & judges, __________, Headnote, Cases referred to, Counsel, Judgment(s).', a:['Catchwords']},
+      {id:82, sec:'B', type:'fill', q:'Catchwords are subject __________ supplied by the reporter.', a:['headings','indexes']},
+      {id:83, sec:'B', type:'tf', q:'The headnote is authoritative and may safely be cited as the ratio.', a:false},
+      {id:84, sec:'B', type:'fill', q:'Chief Justice Gleeson remarked that there are some cases where people who write headnotes deserve a __________.', a:['medal']},
+      {id:86, sec:'B', type:'fill', q:'The headnote is a __________, not the territory.', a:['map']},
+      {id:87, sec:'B', type:'mcq', q:'Which part of the report contains the reasoning and decision of the court?', opts:['Catchwords','Headnote','Judgment(s)','Cases referred to'], a:2},
+      {id:88, sec:'B', type:'fill', q:'The title of a case identifies the __________ to the dispute.', a:['parties']},
+      {id:89, sec:'B', type:'tf', q:'The citation (year, series, page) is written by the judge.', a:false},
+      {id:90, sec:'B', type:'fill', q:'Always read the __________ judgment; use the headnote only for orientation.', a:['full']},
+      {id:92, sec:'B', type:'fill', q:'The judgment(s) section contains both the __________ and the decision.', a:['reasoning']},
+      {id:93, sec:'B', type:'mcq', q:'“Cases referred to” lists:', opts:['Only cases that bind the court','Authorities cited in the judgment','Cases the headnote writer liked','Unreported decisions only'], a:1},
+      {id:94, sec:'B', type:'fill', q:'Counsel are the __________ for the parties.', a:['lawyers']},
+      {id:96, sec:'B', type:'fill', q:'The headnote is written by the law __________ or editor, NOT by the judge.', a:['reporter']},
+      {id:97, sec:'B', type:'fill', q:'The headnote summarises facts, issues and __________ — but it remains a map, not the territory.', a:['holding']},
+      {id:98, sec:'B', type:'tf', q:'It is acceptable to cite the headnote when the judgment is very long.', a:false},
+      {id:99, sec:'B', type:'fill', q:'WARNING: Never cite the headnote as the __________, and never copy it into your brief as the ratio.', a:['ratio']},
+      {id:101, sec:'B', type:'fill', q:'The citation tells you the __________, series and page of the report.', a:['year']},
+      {id:102, sec:'B', type:'fill', q:'Court & judges tells you which __________ decided the case and the panel.', a:['court']},
+      {id:103, sec:'B', type:'tf', q:'Catchwords are written by the judge as part of the reasoning.', a:false},
+      {id:104, sec:'B', type:'fill', q:'The headnote can be incomplete, __________ or simply wrong.', a:['misleading']},
+      {id:106, sec:'B', type:'fill', q:'The standard anatomy of a law report begins with the __________ (parties) and ends with the Judgment(s).', a:['Title']},
+      {id:107, sec:'B', type:'tf', q:'“Cases referred to” is the same as the ratio.', a:false},
+      {id:108, sec:'B', type:'fill', q:'Key readings for the anatomy of a case include Hanson p. 22 and Glanville Williams pp. __________.', a:['85-92','85–92']},
+      {id:110, sec:'B', type:'fill', q:'The rule is: read the full judgment. Use the headnote for __________ only.', a:['orientation']},
+
+      // SECTION C
+      {id:111, sec:'C', type:'fill', q:'Glanville Williams said finding the ratio depends on a process of __________ from the totality of facts in the case.', a:['abstraction']},
+      {id:112, sec:'C', type:'fill', q:'He described the process as “not a mechanical process but an __________”, acquired through practice.', a:['art']},
+      {id:113, sec:'C', type:'fill', q:'In the camera-zoom analogy, fully zoomed out means everything is in frame but nothing is in __________.', a:['focus']},
+      {id:114, sec:'C', type:'fill', q:'On Hayakawa’s abstraction ladder, each step up __________ more characteristics of the thing below.', a:['omits']},
+      {id:115, sec:'C', type:'fill', q:'Higher on the ladder = wider __________, less detail.', a:['reach']},
+      {id:116, sec:'C', type:'tf', q:'A ratio stated only at the level of the exact parties and exact facts is useful for future cases.', a:false},
+      {id:117, sec:'C', type:'fill', q:'Too low on the ladder = __________; too high = __________.', a:['useless; meaningless','useless, meaningless']},
+      {id:118, sec:'C', type:'mcq', q:'In the Ghanaian parallel ladder, “Kofi’s taxi on the Achimota road” is at the __________ level.', opts:['Highest (most abstract)','Lowest (most concrete)','Middle','Irrelevant'], a:1},
+      {id:119, sec:'C', type:'fill', q:'Lawyers argue about cases largely because they argue about the proper __________ on the ladder.', a:['rung','level']},
+      {id:121, sec:'C', type:'fill', q:'In Donoghue v Stevenson the plaintiff had __________ contract with the manufacturer.', a:['no']},
+      {id:122, sec:'C', type:'fill', q:'Lord Atkin’s classic statement speaks of a manufacturer of products which he sells in such a form that he intends them to reach the __________ consumer with no reasonable possibility of intermediate __________.', a:['ultimate; examination','ultimate, examination']},
+      {id:123, sec:'C', type:'mcq', q:'Which level did the Court in Donoghue most clearly adopt according to the slides?', opts:['Facts only (Mrs Donoghue can sue Mr Stevenson for a snail…)','Consumers can sue for contaminated beverages in opaque bottles','Manufacturers owe a duty of care to ultimate consumers where there is no intermediate examination','Everyone owes duties to everyone else'], a:2},
+      {id:124, sec:'C', type:'fill', q:'Some writers treat the wide “neighbour principle” as __________, while the narrower manufacturer rule is the true ratio.', a:['obiter']},
+      {id:125, sec:'C', type:'tf', q:'There is genuine and respectable disagreement about whether the neighbour principle is ratio or wide obiter.', a:true},
+      {id:126, sec:'C', type:'fill', q:'When generalising Donoghue’s facts, “ginger beer” can climb to “beverage” then “consumable product” then “__________”.', a:['product']},
+      {id:127, sec:'C', type:'fill', q:'“Decomposed snail” generalises to “foreign object” → “contamination” → “__________”.', a:['defect']},
+      {id:128, sec:'C', type:'fill', q:'Facts such as “Scottish”, “female” and “Paisley” were struck out at step 2 because they could not matter __________.', a:['legally']},
+      {id:130, sec:'C', type:'fill', q:'In the modern chop-bar review example, the court’s choice of level decides how many future __________ the case will govern.', a:['situations']},
+      {id:131, sec:'C', type:'fill', q:'In Wilkinson v Downton, Williams strips away the joke, the husband, and the particular words until only an act __________ to affect the plaintiff adversely and likely to cause physical harm remains.', a:['intended']},
+      {id:132, sec:'C', type:'tf', q:'The particular lie told by Downton is essential to the ratio.', a:false},
+      {id:133, sec:'C', type:'fill', q:'When deciding where to stop abstracting, the primary guide is the __________’s own words.', a:['judge','court']},
+      {id:134, sec:'C', type:'fill', q:'Secondary guides are knowledge of the surrounding __________ and common __________.', a:['law; sense','law, sense']},
+      {id:135, sec:'C', type:'mcq', q:'Judges’ own statements of principle are:', opts:['Always infallible','The primary guide but not the last word','Never useful','Binding even if too wide'], a:1},
+      {id:136, sec:'C', type:'fill', q:'In the fictional Smith v University Parking Services, the correct rung is that self-help immobilisation of another’s vehicle is __________ detention which the owner may reasonably reverse.', a:['unlawful']},
+      {id:137, sec:'C', type:'fill', q:'“Students can damage clamps” is too __________; “people can destroy others’ property” is too __________.', a:['narrow; broad','narrow, broad']},
+      {id:139, sec:'C', type:'fill', q:'“Even if the contract were valid…” signals that what follows is likely __________.', a:['obiter']},
+      {id:141, sec:'C', type:'fill', q:'The abstraction ladder is based on Hayakawa & Hayakawa, Language in Thought and Action, p. __________.', a:['85']},
+      {id:142, sec:'C', type:'fill', q:'At the bottom of the ladder is the process level (atoms, electrons) with __________ characteristics.', a:['infinite']},
+      {id:143, sec:'C', type:'fill', q:'“Bessie” is the name of __________ cow; “cow” is what she shares with other cows.', a:['this one','one']},
+      {id:144, sec:'C', type:'fill', q:'Climbing further, Bessie becomes livestock, farm assets, asset, and finally __________.', a:['wealth']},
+      {id:145, sec:'C', type:'tf', q:'Each step up the ladder adds more characteristics of the original thing.', a:false},
+      {id:146, sec:'C', type:'fill', q:'The point of the ladder is that higher levels have wider __________ but less detail.', a:['reach']},
+      {id:148, sec:'C', type:'fill', q:'A ratio that is too broad becomes __________ because it no longer distinguishes like cases from unlike cases.', a:['meaningless']},
+      {id:149, sec:'C', type:'fill', q:'The five-step process begins with listing __________ the facts.', a:['ALL','all']},
+      {id:150, sec:'C', type:'fill', q:'Step 2 is to cross out the __________ facts.', a:['irrelevant']},
+      {id:151, sec:'C', type:'fill', q:'Step 3 is to __________ the relevant facts (climb each fact up its own ladder).', a:['generalise']},
+      {id:152, sec:'C', type:'fill', q:'Step 4 is to find the court’s __________ of abstraction.', a:['level']},
+      {id:153, sec:'C', type:'fill', q:'Step 5 is to __________ your work — would this principle decide similar future cases?', a:['check']},
+      {id:154, sec:'C', type:'tf', q:'In Donoghue, the fact that the bottle was opaque was treated as irrelevant.', a:false},
+      {id:155, sec:'C', type:'fill', q:'The absence of intermediate __________ was a key generalised fact in Lord Atkin’s statement.', a:['examination']},
+      {id:157, sec:'C', type:'fill', q:'View A treats the neighbour principle as the ratio; View B treats the widest reach as __________.', a:['obiter']},
+      {id:158, sec:'C', type:'fill', q:'Both views are respectable because the disagreement IS the __________ problem.', a:['abstraction']},
+      {id:160, sec:'C', type:'fill', q:'In Green v Coffee Express the court chose the __________ rung — abstract enough to cover other drive-throughs and hot drinks, but not all products.', a:['middle']},
+      {id:161, sec:'C', type:'tf', q:'The court’s own words are a useful guide to the level of abstraction it intended.', a:true},
+      {id:162, sec:'C', type:'fill', q:'Abstraction explains disagreement: lawyers argue about whether Donoghue is about bottles of ginger beer or a duty of care to __________.', a:['neighbours']},
+      {id:163, sec:'C', type:'fill', q:'Abstraction shows how law develops: later courts can “re-read” earlier cases at different __________.', a:['levels']},
+      {id:164, sec:'C', type:'fill', q:'Abstraction reveals judicial choice: judges choose a level of abstraction that creates the rule they think __________.', a:['appropriate']},
+      {id:166, sec:'C', type:'fill', q:'In Wilkinson v Downton the defendant told a practical __________ that caused nervous shock.', a:['joke']},
+      {id:167, sec:'C', type:'fill', q:'Williams’ abstraction discards that it was a joke, that it concerned a husband, the particular words, and the __________.', a:['place']},
+      {id:168, sec:'C', type:'fill', q:'What remains is an act intended to affect the plaintiff __________ and likely to cause physical harm, plus the resulting harm.', a:['adversely']},
+      {id:169, sec:'C', type:'tf', q:'Wilkinson v Downton is a classic illustration of climbing the abstraction ladder.', a:true},
+      {id:170, sec:'C', type:'fill', q:'Judges’ own statements of principle may include inessential facts (making the ratio too __________) or be too sweeping (too __________).', a:['narrow; broad','narrow, broad']},
+      {id:172, sec:'C', type:'fill', q:'In Smith v University Parking Services the student cut off a __________ placed by campus security.', a:['clamp']},
+      {id:173, sec:'C', type:'fill', q:'The court held that the university cannot use self-help remedies that effectively hold a person’s property __________.', a:['hostage']},
+      {id:174, sec:'C', type:'fill', q:'The correct ratio is that property owners cannot use self-help remedies that immobilise another’s vehicle; such immobilisation constitutes unlawful __________ of property.', a:['detention']},
+      {id:176, sec:'C', type:'fill', q:'One pitfall is confusing __________ with ratio (e.g. “Even if the contract were valid…”).', a:['obiter']},
+      {id:177, sec:'C', type:'fill', q:'Another pitfall is copying the __________.', a:['headnote']},
+      {id:178, sec:'C', type:'fill', q:'When there are multiple judgments, the ratio is the reasoning shared by the __________.', a:['majority']},
+      {id:179, sec:'C', type:'fill', q:'Later courts may read a case differently from its __________ — the ratio can evolve.', a:['author']},
+      {id:180, sec:'C', type:'fill', q:'The abstraction trap is stating the ratio too __________ or too __________.', a:['specific/narrow; general/broad','narrow; broad']},
+      {id:181, sec:'C', type:'tf', q:'The first-impression trap is the tendency to latch onto the first clear principle and stop reading.', a:true},
+      {id:182, sec:'C', type:'fill', q:'Temporal and cultural context means a 1932 case was written for 1932 __________; the judge assumes knowledge you may not have.', a:['lawyers']},
+      {id:184, sec:'C', type:'fill', q:'Some cases have multiple ratios of ascending degrees of __________.', a:['generality']},
+      {id:185, sec:'C', type:'fill', q:'A later court may say that a rule stated by an earlier judge ought to be read more widely by abandoning some __________ expressed in it.', a:['limitation']},
+      {id:186, sec:'C', type:'fill', q:'Conversely, a later court may cut down an unnecessarily __________ rule.', a:['wide']},
+      {id:187, sec:'C', type:'tf', q:'The phrase “the ratio decidendi of a case” can mean either the rule the judge intended or the rule a later court concedes him to have had power to lay down.', a:true},
+      {id:188, sec:'C', type:'fill', q:'Restrictive distinguishing is one kind of cutting down the expressed __________.', a:['ratio']},
+      {id:190, sec:'C', type:'fill', q:'The higher the abstraction, the __________ the ratio decidendi.', a:['wider']},
+      {id:191, sec:'C', type:'fill', q:'A rule that “it is a tort to tell a lie that is likely to and does cause fright” is a __________ rule belonging to a low level of abstraction.', a:['narrow']},
+      {id:192, sec:'C', type:'fill', q:'Replacing “tell a lie” with “do any act with intent to affect the plaintiff in body or mind” makes the rule __________.', a:['wider']},
+      {id:193, sec:'C', type:'tf', q:'Common sense and knowledge of the surrounding law help decide where to stop abstracting.', a:true},
+      {id:194, sec:'C', type:'fill', q:'The finding of the ratio decidendi is not an automatic process; it calls for lawyerly __________ and knowledge.', a:['skill']},
+      {id:196, sec:'C', type:'fill', q:'A baby learns to call a terrier “bow-wow” and then applies the same word to other dogs — this is an early example of __________.', a:['abstraction']},
+      {id:197, sec:'C', type:'fill', q:'The individual dog Caesar is, at a low level, a terrier; higher, a dog; higher still, a mammal, an animal, a living thing — these are different levels of __________.', a:['abstraction']},
+      {id:199, sec:'C', type:'fill', q:'How do we know when to stop with our abstraction? Primarily by reading what the __________ says in the judgment.', a:['judge']},
+      {id:200, sec:'C', type:'fill', q:'Partly also by our knowledge of the law in general, and by our __________ sense and feeling for what the law ought to be.', a:['common']},
+
+      // SECTION D
+      {id:201, sec:'D', type:'fill', q:'Wambaugh’s inversion test: take a proposition, __________ it, and ask whether the decision would have been different.', a:['invert','reverse']},
+      {id:202, sec:'D', type:'fill', q:'If the inverted proposition would change the result, the original proposition is __________; if not, it is __________.', a:['ratio; obiter','ratio, obiter']},
+      {id:203, sec:'D', type:'tf', q:'Wambaugh’s test works perfectly when a case rests on two independent grounds.', a:false},
+      {id:204, sec:'D', type:'fill', q:'Goodhart’s test focuses not on what the judge __________, but on the facts the judge treated as __________.', a:['says; material','says, material']},
+      {id:205, sec:'D', type:'fill', q:'According to Goodhart, ratio = the decision on those __________ facts.', a:['material']},
+      {id:207, sec:'D', type:'fill', q:'The snail itself was __________ a material fact under Goodhart’s approach.', a:['not']},
+      {id:208, sec:'D', type:'mcq', q:'Best practice is to:', opts:['Rely only on Wambaugh','Rely only on Goodhart','Find the ratio by abstraction, then check with both tests','Ignore both tests and use only the headnote'], a:2},
+      {id:209, sec:'D', type:'fill', q:'Julius Stone emphasised that every material fact can be described at many levels of __________.', a:['generality']},
+      {id:210, sec:'D', type:'fill', q:'The broader you state the fact, the __________ the ratio.', a:['wider']},
+      {id:211, sec:'D', type:'tf', q:'Often it is later courts that fix the scope of a ratio by how they apply it.', a:true},
+      {id:212, sec:'D', type:'fill', q:'Stone’s problem IS the __________ problem.', a:['abstraction']},
+      {id:214, sec:'D', type:'fill', q:'Abstraction is the method; Wambaugh and Goodhart are __________.', a:['checks']},
+      {id:216, sec:'D', type:'fill', q:'In the comparison table, Wambaugh focuses on the legal __________ stated by the judge.', a:['proposition']},
+      {id:217, sec:'D', type:'fill', q:'Goodhart focuses on the facts the judge treated as __________.', a:['material']},
+      {id:218, sec:'D', type:'tf', q:'“Material” is an unambiguous concept under Goodhart’s test.', a:false},
+      {id:219, sec:'D', type:'fill', q:'Ginger beer (narrowest) → a beverage → something consumable → a __________ (broadest).', a:['product']},
+      {id:221, sec:'D', type:'fill', q:'Wambaugh was a professor at __________.', a:['Harvard']},
+      {id:222, sec:'D', type:'fill', q:'Goodhart’s classic article appeared in the Yale Law Journal in __________.', a:['1930']},
+      {id:223, sec:'D', type:'fill', q:'Stone’s article “The Ratio of the Ratio Decidendi” appeared in the Modern Law Review in __________.', a:['1959']},
+      {id:224, sec:'D', type:'tf', q:'Wambaugh’s test is best for single-ground decisions and as a quick check.', a:true},
+      {id:225, sec:'D', type:'fill', q:'Goodhart’s test is better for understanding the __________ of a decision.', a:['scope']},
+      {id:227, sec:'D', type:'fill', q:'If you invert a proposition and the court would still have reached the same result, the proposition is not __________ to the decision.', a:['essential']},
+      {id:228, sec:'D', type:'fill', q:'Under Goodhart, you first identify __________ the facts, then decide which the judge treated as material.', a:['ALL','all']},
+      {id:229, sec:'D', type:'tf', q:'The snail in the bottle was essential to the ratio of Donoghue under Goodhart’s test.', a:false},
+      {id:231, sec:'D', type:'fill', q:'The limitation of Wambaugh is that it struggles where a case rests on two __________ grounds.', a:['independent']},
+      {id:232, sec:'D', type:'fill', q:'The limitation of Goodhart is that “material” is __________; facts can be stated broadly or narrowly.', a:['ambiguous']},
+      {id:234, sec:'D', type:'fill', q:'Best practice taught in the course: find the ratio by __________, then check it with both Wambaugh and Goodhart.', a:['abstraction']},
+      {id:235, sec:'D', type:'tf', q:'If the two tests converge on the same ratio, you can be more confident.', a:true},
+      {id:236, sec:'D', type:'fill', q:'In the inversion test, YES (decision would change) means the proposition is __________; NO means it is __________.', a:['ratio; obiter','ratio, obiter']},
+      {id:238, sec:'D', type:'fill', q:'Goodhart argued that the ratio is found not in what the judge says but in the __________ the judge treats as material and the decision based on them.', a:['facts']},
+      {id:240, sec:'D', type:'fill', q:'Stone showed that the same “material fact” can be described at many levels of __________, producing different widths of ratio.', a:['generality']},
+      {id:241, sec:'D', type:'tf', q:'Later courts often fix the scope of an earlier ratio by the way they apply (or distinguish) it.', a:true},
+      {id:242, sec:'D', type:'fill', q:'Abstraction is the method; the cross-checks are tools to __________ your statement of the ratio.', a:['test','verify']},
+      {id:244, sec:'D', type:'fill', q:'The course materials recommend using the abstraction ladder first, then the __________ tests as cross-checks.', a:['cross-check']},
+      {id:246, sec:'D', type:'fill', q:'Wambaugh’s test is sometimes called the __________ test.', a:['inversion']},
+      {id:247, sec:'D', type:'tf', q:'A proposition that survives the inversion test is more likely to be ratio.', a:true},
+      {id:248, sec:'D', type:'fill', q:'When a case has two independent grounds, inverting only one ground may still leave the decision intact — this is a known __________ of Wambaugh.', a:['limitation']},
+      {id:250, sec:'D', type:'fill', q:'The ultimate goal of the cross-checks is to test whether your proposed ratio is __________ to the decision the court actually reached.', a:['essential']},
+
+      // SECTION E
+      {id:251, sec:'E', type:'fill', q:'An obiter dictum is a mere saying “by the __________”.', a:['way']},
+      {id:252, sec:'E', type:'fill', q:'Obiter is not __________, though it may be respected according to the reputation of the judge and the circumstances.', a:['binding']},
+      {id:253, sec:'E', type:'tf', q:'A suggested rule upon which the decision is not finally rested is still ratio.', a:false},
+      {id:254, sec:'E', type:'fill', q:'One reason for not regarding obiter as binding is that it was probably made without a full __________ of the cases on the point.', a:['consideration']},
+      {id:255, sec:'E', type:'fill', q:'Restrictive distinguishing occurs when a later court cuts down the expressed ratio by treating as material a fact the earlier court regarded as __________.', a:['immaterial']},
+      {id:256, sec:'E', type:'fill', q:'Non-restrictive distinguishing accepts the earlier ratio but finds a material difference of __________.', a:['fact']},
+      {id:258, sec:'E', type:'fill', q:'A decision given per incuriam loses its binding force on __________ courts.', a:['lower']},
+      {id:259, sec:'E', type:'mcq', q:'When a higher court has given two conflicting decisions, a lower court:', opts:['Must follow the later one only','Must follow the earlier one only','May choose which to follow','Must refer the matter to the Supreme Court'], a:2},
+      {id:260, sec:'E', type:'fill', q:'In the assignment, the Court held that Hanna Kwarteng v Adwoa Tiwa was given __________.', a:['per incuriam']},
+      {id:261, sec:'E', type:'tf', q:'Comparative material from New Zealand or the UK Equality Act is usually ratio in a Ghanaian judgment.', a:false},
+      {id:262, sec:'E', type:'fill', q:'Background facts or a statement of a party’s case are classified as __________ (ratio / obiter / neither).', a:['neither']},
+      {id:266, sec:'E', type:'fill', q:'The 30-second test requires you to explain the ratio to a relative with no legal training, in no more than __________ words and without any __________ or technical terms.', a:['80; Latin','80, Latin']},
+      {id:268, sec:'E', type:'fill', q:'The Court of Appeal is bound by the __________ Court.', a:['Supreme']},
+      {id:269, sec:'E', type:'tf', q:'The Supreme Court is bound by its own previous decisions in the same way as the Court of Appeal.', a:false},
+      {id:271, sec:'E', type:'fill', q:'An example of obiter is a rule of law stated merely by way of __________ or illustration.', a:['analogy']},
+      {id:272, sec:'E', type:'fill', q:'Another example is a suggested rule upon which the decision is not finally __________.', a:['rested']},
+      {id:273, sec:'E', type:'tf', q:'A ruling based upon hypothetical facts is usually obiter.', a:true},
+      {id:274, sec:'E', type:'fill', q:'In Wilkinson v Downton the judge’s discussion of the tort of deceit was __________ because the decision was not finally rested on it.', a:['obiter']},
+      {id:276, sec:'E', type:'fill', q:'The real justification for regarding an unnecessarily wide ratio as obiter is the undesirability of hampering the __________ of the law through too extensive application of precedent.', a:['growth']},
+      {id:277, sec:'E', type:'fill', q:'Lower courts will not generally dare to restrictively distinguish decisions of courts __________ to them, especially the Supreme Court.', a:['superior']},
+      {id:278, sec:'E', type:'tf', q:'A decision sub silentio is binding in the same way as a fully reasoned decision.', a:false},
+      {id:279, sec:'E', type:'fill', q:'Classification practice (Assignment style): “A presumption of advancement may be rebutted on only two grounds…” — this is likely __________ if it was necessary to the decision.', a:['ratio']},
+      {id:280, sec:'E', type:'fill', q:'“If the donee signed a mortgage over the property, that would be admissible…” — this is likely __________ because it is hypothetical.', a:['obiter']},
+      {id:283, sec:'E', type:'fill', q:'Per incuriam means the earlier decision was given through __________ or oversight (e.g. a relevant statute or binding authority was not considered).', a:['inadvertence','oversight']},
+      {id:284, sec:'E', type:'fill', q:'The effect of a per incuriam holding is that lower courts are __________ longer bound by the earlier decision on that point.', a:['no']},
+      {id:285, sec:'E', type:'tf', q:'Comparative foreign material (UK, New Zealand) is almost always part of the ratio of a Ghanaian Supreme Court decision.', a:false},
+      {id:286, sec:'E', type:'fill', q:'Statements of a party’s case or background narrative are classified as __________.', a:['neither']},
+      {id:288, sec:'E', type:'fill', q:'The 30-second test is a practical check: if you cannot explain the ratio simply, you have not yet __________ it.', a:['found']},
+      {id:290, sec:'E', type:'fill', q:'Obiter dicta may still be highly __________ even though they are not binding.', a:['persuasive']},
+      {id:291, sec:'E', type:'tf', q:'An obiter statement by a single High Court judge carries the same weight as an obiter statement by the Supreme Court.', a:false},
+      {id:292, sec:'E', type:'fill', q:'The reputation of the __________, the eminence of the court, and the circumstances all affect the persuasive weight of obiter.', a:['judge']},
+      {id:294, sec:'E', type:'fill', q:'In the hierarchy, a decision of the Supreme Court binds the Court of Appeal, the High Court, and the __________ courts.', a:['circuit','district','circuit/district']},
+      {id:295, sec:'E', type:'fill', q:'The Supreme Court may depart from its own previous decisions when it appears __________ to do so.', a:['right']},
+      {id:296, sec:'E', type:'tf', q:'The Court of Appeal may depart from a Supreme Court decision if it thinks the decision is wrong.', a:false},
+      {id:297, sec:'E', type:'fill', q:'When two Court of Appeal decisions conflict, a lower court may __________ which to follow.', a:['choose']},
+      {id:299, sec:'E', type:'fill', q:'Overruling occurs when a higher court holds that an earlier decision was __________ decided.', a:['wrongly']},
+      {id:300, sec:'E', type:'fill', q:'Distinguishing occurs when a court accepts the earlier ratio but finds the present case falls outside it because of a material difference of __________.', a:['fact']},
+      {id:301, sec:'E', type:'tf', q:'Restrictive distinguishing is a way of cutting down an earlier ratio without formally overruling it.', a:true},
+      {id:302, sec:'E', type:'fill', q:'Some precedents become very “__________” — they are continually left on the shelf by successive distinguishing.', a:['distinguished']},
+      {id:304, sec:'E', type:'fill', q:'The limit of distinguishing is reached when a judge says the precedent is an authority only “on its __________ facts”.', a:['actual']},
+      {id:306, sec:'E', type:'fill', q:'If you cannot explain the ratio to a non-lawyer in plain language, you have not yet __________ the ratio.', a:['found']},
+      {id:307, sec:'E', type:'tf', q:'Latin phrases such as “ratio decidendi” and “obiter dictum” should be used when explaining the ratio to a relative with no legal training.', a:false},
+      {id:308, sec:'E', type:'fill', q:'The assignment requires the explanation to be in no more than __________ words.', a:['80']},
+      {id:310, sec:'E', type:'fill', q:'Classification of passages in a judgment is a core skill tested in Part D of the __________ assignment.', a:['ratio']},
+      {id:311, sec:'E', type:'tf', q:'Every statement of law in a judgment is either ratio or obiter.', a:false},
+      {id:312, sec:'E', type:'fill', q:'Some statements are “neither” — for example, background narrative or a summary of a party’s __________.', a:['case']},
+      {id:314, sec:'E', type:'fill', q:'A statement about how lower courts should treat conflicting higher-court decisions is likely to be __________ if it was necessary to resolve the appeal.', a:['ratio']},
+      {id:316, sec:'E', type:'fill', q:'The course materials emphasise that the ratio is the reasoning on the question the court __________ to decide.', a:['had','needed']},
+      {id:317, sec:'E', type:'tf', q:'A court can create binding ratio on an issue it expressly declines to decide.', a:false},
+      {id:318, sec:'E', type:'fill', q:'Hypothetical reasoning (“If the facts had been different…”) is classic __________.', a:['obiter']},
+      {id:320, sec:'E', type:'fill', q:'The ultimate test of whether a statement is ratio is whether the court needed that statement in order to __________ the case.', a:['decide','reach']},
+
+      // SECTION F
+      {id:321, sec:'F', type:'fill', q:'Samuelson’s foundational metaphor is that good prose is like a __________ pane.', a:['window']},
+      {id:322, sec:'F', type:'fill', q:'If the reader is distracted by style, complex sentences or unfamiliar words, the window becomes __________.', a:['opaque']},
+      {id:323, sec:'F', type:'fill', q:'Samuelson’s Rule 1 is: Have a __________.', a:['point','thesis']},
+      {id:324, sec:'F', type:'fill', q:'Rule 2 is: Get to the __________.', a:['point']},
+      {id:325, sec:'F', type:'fill', q:'Think of your thesis as the __________ of your paper — do not put all of it in the dessert.', a:['spice']},
+      {id:326, sec:'F', type:'fill', q:'Rule 3 warns against the “artificial __________” trap (Intro → Background → Facts → Analysis…).', a:['structure']},
+      {id:327, sec:'F', type:'fill', q:'Rule 4: Break your analysis into __________ and limit yourself to 2–3 main arguments.', a:['components']},
+      {id:328, sec:'F', type:'fill', q:'Rule 5: Adopt a __________ tone — write as if addressing a sceptical but fair judge.', a:['measured']},
+      {id:329, sec:'F', type:'fill', q:'Rule 6: Be __________ and simplify. “Make things as simple as possible — but no simpler.”', a:['concrete']},
+      {id:330, sec:'F', type:'tf', q:'Lucidity comes naturally to most law students because they read so much good judicial writing.', a:false},
+      {id:331, sec:'F', type:'fill', q:'Painter’s Rule 1: Write __________ sentences (under 25 words is ideal).', a:['short']},
+      {id:332, sec:'F', type:'fill', q:'Keep subject and __________ close together.', a:['verb']},
+      {id:333, sec:'F', type:'fill', q:'Avoid double/triple __________ (“not unlike”, “not without merit”).', a:['negatives']},
+      {id:334, sec:'F', type:'fill', q:'Use __________ voice, not passive.', a:['active']},
+      {id:335, sec:'F', type:'fill', q:'Avoid __________ (nouns derived from verbs such as “consideration”, “determination”).', a:['nominalisations']},
+      {id:336, sec:'F', type:'fill', q:'“Due to the fact that” should almost always be replaced by __________.', a:['because']},
+      {id:337, sec:'F', type:'fill', q:'“It is important to note that…” and “It is submitted that…” are examples of __________-clearing.', a:['throat']},
+      {id:339, sec:'F', type:'fill', q:'Orwell’s Rule 3: Cut every __________ word.', a:['cuttable']},
+      {id:341, sec:'F', type:'fill', q:'Samuelson says students write badly because they imitate the worst features of __________ opinions.', a:['judicial']},
+      {id:342, sec:'F', type:'fill', q:'They confuse __________ with sophistication and believe jargon signals expertise.', a:['complexity']},
+      {id:343, sec:'F', type:'tf', q:'The style most successful for legal analysis is “flawlessly clear, lucid, and enlightening”.', a:true},
+      {id:344, sec:'F', type:'fill', q:'Rule 1 problems: having no point, or having too __________ points.', a:['many']},
+      {id:345, sec:'F', type:'fill', q:'Samuelson advises: “Take a risk. Bite the bullet. Choose your __________ and see where it takes you.”', a:['thesis']},
+      {id:346, sec:'F', type:'fill', q:'Get to the point early — state your thesis in the first paragraph or by the end of page __________ at the latest.', a:['two']},
+      {id:347, sec:'F', type:'fill', q:'Do not save your argument for the __________.', a:['conclusion']},
+      {id:348, sec:'F', type:'tf', q:'The artificial structure (Intro–Background–Facts–Holdings–Analysis–Policy–Conclusion) gets to the point quickly.', a:false},
+      {id:349, sec:'F', type:'fill', q:'The good structure integrates facts, law and __________ into each argument section.', a:['policy']},
+      {id:350, sec:'F', type:'fill', q:'Human beings get bored or confused if you make six, twelve or twenty __________ at once.', a:['arguments']},
+      {id:351, sec:'F', type:'fill', q:'Use __________ for secondary points that support the argument but do not deserve a full section.', a:['footnotes']},
+      {id:353, sec:'F', type:'fill', q:'Too forceful a tone makes the reader feel __________; too wishy-washy makes the reader doubt your competence.', a:['bludgeoned']},
+      {id:354, sec:'F', type:'fill', q:'Whenever there is a choice between abstract and concrete, opt for __________.', a:['concrete']},
+      {id:355, sec:'F', type:'fill', q:'If you must be abstract, immediately give a concrete __________.', a:['example']},
+      {id:356, sec:'F', type:'fill', q:'Prune your text — at least __________ % can usually be trimmed without loss of meaning.', a:['5-10','5–10']},
+      {id:357, sec:'F', type:'tf', q:'Every word in your text should earn its place; if it does not contribute, cut it.', a:true},
+      {id:358, sec:'F', type:'fill', q:'Painter’s core message: the goal of legal writing is NOT to produce a document that reads like a “__________ document”.', a:['legal']},
+      {id:359, sec:'F', type:'fill', q:'The goal is to communicate ideas clearly and __________.', a:['persuasively']},
+      {id:360, sec:'F', type:'fill', q:'Legalese is the number-one complaint of appellate __________ and clerks.', a:['judges']},
+      {id:361, sec:'F', type:'fill', q:'If a judge has to re-read your sentence to understand it, you have __________.', a:['failed']},
+      {id:363, sec:'F', type:'fill', q:'“Hereinafter referred to as” can almost always be replaced by simply using the __________.', a:['name']},
+      {id:364, sec:'F', type:'fill', q:'“The aforesaid / aforementioned” should be replaced by “the / this / __________”.', a:['that']},
+      {id:365, sec:'F', type:'fill', q:'“Null and void and of no effect” can be reduced to __________.', a:['void']},
+      {id:366, sec:'F', type:'fill', q:'“Failed and/or neglected and/or refused” should become simply “__________ to”.', a:['failed']},
+      {id:367, sec:'F', type:'tf', q:'“On or about the 15th day of” is clearer than “on 15 March”.', a:false},
+      {id:368, sec:'F', type:'fill', q:'Active voice example: “A decision was made by the court” becomes “The court __________”.', a:['decided']},
+      {id:369, sec:'F', type:'fill', q:'Nominalisation example: “Consideration was given to the contract” becomes “The court __________ the contract”.', a:['considered']},
+      {id:370, sec:'F', type:'fill', q:'“There was a failure to deliver the goods” becomes “The supplier __________ to deliver”.', a:['failed']},
+      {id:372, sec:'F', type:'fill', q:'“It is important to note that…” should usually be __________ entirely.', a:['deleted']},
+      {id:373, sec:'F', type:'fill', q:'“In the event that” becomes __________.', a:['If']},
+      {id:374, sec:'F', type:'fill', q:'“At this point in time” becomes __________.', a:['Now']},
+      {id:375, sec:'F', type:'fill', q:'“Prior to the commencement of” becomes __________.', a:['Before']},
+      {id:376, sec:'F', type:'tf', q:'“Utilise” is almost always better than “use”.', a:false},
+      {id:377, sec:'F', type:'fill', q:'“Commence” should usually be “__________” or “start”.', a:['begin']},
+      {id:378, sec:'F', type:'fill', q:'“Notwithstanding” can often be replaced by __________.', a:['despite']},
+      {id:379, sec:'F', type:'fill', q:'Exception: terms of art with precise legal meaning (estoppel, res judicata, ultra vires) are not __________ — they are necessary technical terms.', a:['legalese']},
+      {id:381, sec:'F', type:'fill', q:'Orwell’s Rule 1: Never use a __________ metaphor.', a:['stale']},
+      {id:382, sec:'F', type:'fill', q:'Orwell’s Rule 2: Prefer the __________ word over the long one.', a:['short']},
+      {id:383, sec:'F', type:'fill', q:'Orwell’s Rule 4: Prefer __________ voice over passive.', a:['active']},
+      {id:384, sec:'F', type:'fill', q:'Orwell’s Rule 5: Prefer everyday English over __________.', a:['jargon']},
+      {id:385, sec:'F', type:'fill', q:'Orwell’s Rule 6: Break any of these rules sooner than say anything outright __________.', a:['barbarous']},
+      {id:386, sec:'F', type:'tf', q:'Technical terms of art should be avoided even when they are the most precise word.', a:false},
+      {id:387, sec:'F', type:'fill', q:'The plain-language movement holds that when people read your document they should understand it the __________ time they read it.', a:['first']},
+      {id:389, sec:'F', type:'fill', q:'In Ghana there is growing recognition that access to __________ requires clear legal communication.', a:['justice']},
+      {id:391, sec:'F', type:'fill', q:'Samuelson’s additional advice includes using __________ section titles (not just “Facts” or “Analysis”).', a:['meaningful']},
+      {id:392, sec:'F', type:'fill', q:'Keep quotations __________ — no more than about 10 indented lines; never end a paragraph with a quotation.', a:['short']},
+      {id:393, sec:'F', type:'fill', q:'Resolve issues as you __________; do not raise a point and leave it hanging.', a:['go']},
+      {id:394, sec:'F', type:'tf', q:'Strong opening lines should begin with “In A v B the court held…”.', a:false},
+      {id:395, sec:'F', type:'fill', q:'The paper should flow, not start and stop like a train on a __________ run.', a:['milk']},
+      {id:397, sec:'F', type:'fill', q:'The tone of a paper is one of the primary things that will make a reader decide whether to __________ or distrust the writer.', a:['trust']},
+      {id:399, sec:'F', type:'fill', q:'Good legal writing follows the same rules as any good __________-fiction prose.', a:['non']},
+      {id:400, sec:'F', type:'fill', q:'The single most impactful change most students can make is to write __________ sentences.', a:['short']},
+
+      // SECTION G
+      {id:401, sec:'G', type:'fill', q:'Every good legal paragraph begins with a strong __________ sentence.', a:['topic']},
+      {id:402, sec:'G', type:'fill', q:'The golden rule is __________ idea per paragraph.', a:['one']},
+      {id:403, sec:'G', type:'fill', q:'CREAC stands for Conclusion, Rule, __________, Conclusion (or Application).', a:['Explanation','Application']},
+      {id:404, sec:'G', type:'fill', q:'IRAC stands for Issue, Rule, __________, Conclusion.', a:['Application']},
+      {id:405, sec:'G', type:'tf', q:'In legal writing, length is usually rewarded.', a:false},
+      {id:406, sec:'G', type:'fill', q:'Topic sentences should be specific and __________ — the reader should know the destination before reading the route.', a:['directional']},
+      {id:407, sec:'G', type:'fill', q:'Transitions and __________ prevent the paper from starting and stopping like a train on a milk run.', a:['signposting']},
+      {id:409, sec:'G', type:'fill', q:'In academic writing the purpose is often to explore ideas; in legal writing the purpose is to __________, advise or record decisions.', a:['persuade']},
+      {id:411, sec:'G', type:'fill', q:'A weak topic sentence: “There are many factors to consider.” A strong one: “Three factors support the __________’s case.”', a:['Claimant']},
+      {id:412, sec:'G', type:'fill', q:'A weak topic sentence: “The law on this point is complex.” A strong one: “Section 12 of the Contracts Act creates a __________-part test.”', a:['two']},
+      {id:413, sec:'G', type:'fill', q:'A weak topic sentence: “This case is relevant.” A strong one: “Tuffuor v Attorney-General establishes that the Constitution is the __________ law.”', a:['supreme']},
+      {id:414, sec:'G', type:'tf', q:'You should be able to read just the first sentence of each paragraph and still follow the argument.', a:true},
+      {id:415, sec:'G', type:'fill', q:'Transition words for addition include Furthermore, Moreover, In __________.', a:['addition']},
+      {id:416, sec:'G', type:'fill', q:'Transition words for cause/effect include Consequently, Therefore, As a __________, Accordingly.', a:['result']},
+      {id:417, sec:'G', type:'fill', q:'Use headings and __________ (Samuelson: meaningful titles).', a:['subheadings']},
+      {id:419, sec:'G', type:'fill', q:'Legal writing is __________ communication — every sentence should advance your argument or inform your reader.', a:['purposeful']},
+      {id:420, sec:'G', type:'fill', q:'Five habits for becoming a better legal writer include: read good writing, write regularly, edit ruthlessly, read your writing __________, and accept criticism gracefully.', a:['aloud']},
+      {id:421, sec:'G', type:'tf', q:'The first draft is usually good enough if you have researched thoroughly.', a:false},
+      {id:422, sec:'G', type:'fill', q:'Samuelson on editing: cut __________ % on every revision.', a:['5-10','5–10']},
+      {id:423, sec:'G', type:'fill', q:'Reading aloud is effective because your __________ catches what your eye misses.', a:['ear']},
+      {id:424, sec:'G', type:'fill', q:'Samuelson on criticism: be a plastic surgeon removing a __________, not a critic who devastates.', a:['wart']},
+      {id:426, sec:'G', type:'fill', q:'One cure for writer’s block is to start with whatever section you __________ write — you do not have to start at the beginning.', a:['can']},
+      {id:427, sec:'G', type:'fill', q:'Another cure is to write __________ on purpose — “Most people find it easier to work from a rough draft than from nothing.”', a:['badly']},
+      {id:428, sec:'G', type:'tf', q:'The Pomodoro technique (25-minute focused writing intervals) can help overcome writer’s block.', a:true},
+      {id:429, sec:'G', type:'fill', q:'Self-editing checklist: print the work, read aloud, check sentence length, hunt for __________ voice, eliminate throat-clearing, verify citations.', a:['passive']},
+
+      // SECTION H
+      {id:431, sec:'H', type:'fill', q:'The five steps through any scenario are: Read, Spot, __________, Apply, Conclude.', a:['Frame']},
+      {id:432, sec:'H', type:'fill', q:'Most marks are won or lost at steps __________ and __________.', a:['2 and 4','2, 4']},
+      {id:433, sec:'H', type:'fill', q:'Frame each issue as one short “__________” question.', a:['whether']},
+      {id:434, sec:'H', type:'tf', q:'“Whether there is a contract” is a precise issue statement.', a:false},
+      {id:435, sec:'H', type:'fill', q:'A precise issue names one legal question tied to the dispute and answerable by a __________ of law.', a:['rule']},
+      {id:436, sec:'H', type:'fill', q:'When analysing an essay question, identify the __________ words, content words, and scope/limiting words.', a:['direction']},
+      {id:437, sec:'H', type:'fill', q:'In an essay introduction you should define key terms, outline structure, and state your main __________.', a:['argument','thesis']},
+      {id:438, sec:'H', type:'fill', q:'Each body paragraph should begin with a __________ sentence that introduces the principle or argument.', a:['topic']},
+      {id:439, sec:'H', type:'fill', q:'Your job at every point is to make the script easier for the __________ to mark.', a:['examiner']},
+      {id:441, sec:'H', type:'fill', q:'Too vague: “Whether there is a contract.” Too long: a sentence that buries the question in __________ . Precise: one legal question tied to the dispute.', a:['facts']},
+      {id:442, sec:'H', type:'fill', q:'After framing the issue, you must discuss the __________, apply it to the facts, and conclude.', a:['law','rule']},
+      {id:443, sec:'H', type:'tf', q:'In a scenario answer you should describe every fact in the problem at length.', a:false},
+      {id:444, sec:'H', type:'fill', q:'Link each __________ of the rule to a specific fact in the problem.', a:['element']},
+      {id:445, sec:'H', type:'fill', q:'After answering each issue, you should __________ the party who asked for advice.', a:['advise']},
+      {id:447, sec:'H', type:'fill', q:'Direction words tell you what you need to __________ (examine, discuss, critically analyse…).', a:['do']},
+      {id:448, sec:'H', type:'fill', q:'Content words tell you which area of __________ to focus on.', a:['law']},
+      {id:449, sec:'H', type:'fill', q:'Scope or limiting words __________ your research so you only focus on what the examiner wants.', a:['constrain']},
+      {id:451, sec:'H', type:'fill', q:'A good essay introduction defines key terms, outlines the __________, and states the main argument or eventual conclusion.', a:['structure']},
+      {id:452, sec:'H', type:'fill', q:'In the body, always use __________ — each should begin with a topic sentence.', a:['paragraphs']},
+      {id:453, sec:'H', type:'fill', q:'The topic sentence introduces the concept; what follows is __________ with the aid of a case or illustration.', a:['explanation']},
+      {id:454, sec:'H', type:'tf', q:'In essay questions it is enough to describe the law; analysis of “why” and “how” is optional.', a:false},
+      {id:455, sec:'H', type:'fill', q:'Extra marks are available for historical __________, theoretical perspectives, and critical analysis of weaknesses or uncertainties.', a:['context']},
+      {id:457, sec:'H', type:'fill', q:'Writing a law exam is as __________ as it is liberal — structure and coherence matter as much as opinion.', a:['mechanical']},
+      {id:458, sec:'H', type:'fill', q:'Precision and clarity make a script stand out, not __________.', a:['volume']},
+      {id:459, sec:'H', type:'fill', q:'Final check: does my answer make sense, and have I met every __________ of the question?', a:['requirement']},
+      {id:461, sec:'H', type:'fill', q:'When using cases in an answer, first decide whether the case is __________ point, then analogise or distinguish.', a:['on']},
+      {id:462, sec:'H', type:'tf', q:'You should always cite a case even if it is only loosely related to the issue.', a:false},
+      {id:463, sec:'H', type:'fill', q:'Analogising means showing that the material facts are __________ enough that the same legal result should follow.', a:['similar']},
+      {id:464, sec:'H', type:'fill', q:'Distinguishing means showing a material __________ of fact that takes the present case outside the earlier ratio.', a:['difference']},
+      {id:466, sec:'H', type:'fill', q:'The examiner has hundreds of scripts; your job is to make yours __________ to mark.', a:['easier']},
+      {id:467, sec:'H', type:'fill', q:'A clear __________ lets the examiner see your answer at a glance.', a:['structure']},
+      {id:468, sec:'H', type:'tf', q:'Volume of writing is more important than precision.', a:false},
+      {id:470, sec:'H', type:'fill', q:'In scenario answers, after the conclusion on each issue you should give practical __________ to the party who asked for it.', a:['advice']},
+
+      // SECTION I
+      {id:473, sec:'I', type:'fill', q:'The 30-second test is the final check that you have found a usable __________.', a:['ratio']},
+      {id:482, sec:'I', type:'fill', q:'Part A of the ratio assignment requires material facts in no more than __________ words.', a:['120']},
+      {id:483, sec:'I', type:'fill', q:'The legal issue must be stated as a single question in the form “__________ or not…”.', a:['Whether']},
+      {id:484, sec:'I', type:'fill', q:'Part B requires the ratio at three levels of generality: __________, medium, and broad.', a:['narrow']},
+      {id:486, sec:'I', type:'fill', q:'The Wambaugh test in the assignment asks you to __________ your chosen ratio and ask whether the Court would still have reached the same result.', a:['reverse','invert']},
+      {id:487, sec:'I', type:'fill', q:'The Goodhart test asks you to list the facts the Court treated as __________, and one fact it treated as immaterial.', a:['material']},
+      {id:488, sec:'I', type:'tf', q:'The assignment permits the use of AI tools.', a:false},
+      {id:489, sec:'I', type:'fill', q:'The assignment is individual work; late submissions receive __________.', a:['zero']},
+      {id:491, sec:'I', type:'fill', q:'In the Kojo/Ama WhatsApp problem, Kojo’s status said “First come, first __________!”', a:['served']},
+      {id:492, sec:'I', type:'fill', q:'Ama offered GHS 12,000; Kojo replied that GHS 13,500 was his __________ price.', a:['final']},
+      {id:493, sec:'I', type:'fill', q:'Ama later accepted the 13,500 figure; Kojo replied with a __________-up emoji.', a:['thumbs']},
+      {id:495, sec:'I', type:'fill', q:'The course materials stress that writing a law exam is as mechanical as it is __________.', a:['liberal']},
+      {id:497, sec:'I', type:'fill', q:'The ultimate test of a good ratio statement is whether it decides __________ cases and only like cases.', a:['like']},
+      {id:499, sec:'I', type:'fill', q:'Good legal writing and accurate ratio extraction both require the same underlying skill: the ability to __________ the essential from the inessential.', a:['distinguish','separate']}
+    ];
+
+    // ========== STATE ==========
+    let state = {
+      xp: 0,
+      streak: 0,
+      totalAttempted: 0,
+      totalCorrect: 0,
+      missed: [],
+      rank: 'Novice Advocate'
+    };
+
+    let session = {
+      queue: [],
+      idx: 0,
+      correct: 0,
+      answered: false,
+      mode: null,
+      timer: null,
+      timeLeft: 0
+    };
+
+    const RANKS = [
+      {min:0, name:'Novice Advocate'},
+      {min:80, name:'Junior Counsel'},
+      {min:200, name:'Senior Associate'},
+      {min:400, name:'Barrister'},
+      {min:700, name:'Senior Counsel'},
+      {min:1100, name:'Court of Appeal'},
+      {min:1600, name:'Supreme Court Justice'}
+    ];
+
+    // ========== PERSISTENCE ==========
+    function loadState() {
+      try {
+        const raw = localStorage.getItem('flaw111a_v1');
+        if (raw) state = {...state, ...JSON.parse(raw)};
+      } catch(e){}
+      updateHeader();
+    }
+    function saveState() {
+      localStorage.setItem('flaw111a_v1', JSON.stringify(state));
+      updateHeader();
+    }
+    function updateHeader() {
+      document.getElementById('streak').textContent = state.streak;
+      document.getElementById('xp').textContent = state.xp;
+      document.getElementById('xp-home').textContent = state.xp;
+      const acc = state.totalAttempted ? Math.round((state.totalCorrect / state.totalAttempted) * 100) + '%' : '—';
+      document.getElementById('accuracy').textContent = acc;
+      let rank = RANKS[0].name;
+      for (const r of RANKS) if (state.xp >= r.min) rank = r.name;
+      state.rank = rank;
+      document.getElementById('rank-label').textContent = rank;
+    }
+
+    // ========== SCREENS ==========
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    // ========== SESSION ==========
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function startMode(mode) {
+      let pool = QUESTIONS;
+      if (mode === 'weak' && state.missed.length) {
+        pool = QUESTIONS.filter(q => state.missed.includes(q.id));
+      }
+      let n = mode === 'quick' ? 20 : mode === 'exam' ? 40 : pool.length;
+      n = Math.min(n, pool.length);
+      session = {
+        queue: shuffle(pool).slice(0, n),
+        idx: 0,
+        correct: 0,
+        answered: false,
+        mode,
+        timer: null,
+        timeLeft: mode === 'exam' ? 40 * 60 : 0
+      };
+      if (mode === 'exam') startTimer();
+      showScreen('quiz');
+      renderQuestion();
+    }
+
+    function startSection(sec) {
+      const pool = QUESTIONS.filter(q => q.sec === sec);
+      session = {
+        queue: shuffle(pool),
+        idx: 0,
+        correct: 0,
+        answered: false,
+        mode: 'section-' + sec,
+        timer: null,
+        timeLeft: 0
+      };
+      showScreen('quiz');
+      renderQuestion();
+    }
+
+    function startTimer() {
+      clearInterval(session.timer);
+      const el = document.getElementById('timer');
+      session.timer = setInterval(() => {
+        session.timeLeft--;
+        const m = Math.floor(session.timeLeft / 60);
+        const s = session.timeLeft % 60;
+        el.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+        if (session.timeLeft <= 0) {
+          clearInterval(session.timer);
+          endQuiz();
+        }
+      }, 1000);
+    }
+
+    function renderQuestion() {
+      if (session.idx >= session.queue.length) {
+        endQuiz();
+        return;
+      }
+      const q = session.queue[session.idx];
+      session.answered = false;
+      document.getElementById('q-num').textContent = 'Q' + q.id;
+      document.getElementById('q-type').textContent = q.type.toUpperCase();
+      document.getElementById('q-sec').textContent = 'Section ' + q.sec;
+      document.getElementById('q-text').textContent = q.q;
+      document.getElementById('feedback').className = 'feedback';
+      document.getElementById('btn-check').style.display = 'inline-block';
+      document.getElementById('btn-check').disabled = false;
+      document.getElementById('btn-next').style.display = 'none';
+
+      const body = document.getElementById('q-body');
+      body.innerHTML = '';
+
+      if (q.type === 'mcq') {
+        const div = document.createElement('div');
+        div.className = 'options';
+        q.opts.forEach((opt, i) => {
+          const b = document.createElement('button');
+          b.className = 'opt';
+          b.textContent = String.fromCharCode(97 + i) + ') ' + opt;
+          b.dataset.idx = i;
+          b.onclick = () => selectOpt(b);
+          div.appendChild(b);
+        });
+        body.appendChild(div);
+      } else if (q.type === 'tf') {
+        const div = document.createElement('div');
+        div.className = 'options';
+        ['True', 'False'].forEach((label, i) => {
+          const b = document.createElement('button');
+          b.className = 'opt';
+          b.textContent = label;
+          b.dataset.val = i === 0 ? 'true' : 'false';
+          b.onclick = () => selectOpt(b);
+          div.appendChild(b);
+        });
+        body.appendChild(div);
+      } else {
+        const wrap = document.createElement('div');
+        wrap.className = 'fill-wrap';
+        const input = document.createElement('input');
+        input.className = 'fill-input';
+        input.id = 'fill-ans';
+        input.placeholder = 'Type your answer…';
+        input.autocomplete = 'off';
+        input.onkeydown = e => { if (e.key === 'Enter') checkAnswer(); };
+        wrap.appendChild(input);
+        body.appendChild(wrap);
+        setTimeout(() => input.focus(), 50);
+      }
+
+      const pct = (session.idx / session.queue.length) * 100;
+      document.getElementById('prog-fill').style.width = pct + '%';
+      document.getElementById('prog-text').textContent = `${session.idx + 1} / ${session.queue.length}`;
+    }
+
+    function selectOpt(btn) {
+      if (session.answered) return;
+      document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
+    function normalize(s) {
+      return String(s).toLowerCase().trim()
+        .replace(/[’']/g, "'")
+        .replace(/\s+/g, ' ')
+        .replace(/[.;,]$/, '');
+    }
+
+    function checkAnswer() {
+      if (session.answered) return;
+      const q = session.queue[session.idx];
+      let isCorrect = false;
+      let userAns = '';
+
+      if (q.type === 'mcq') {
+        const sel = document.querySelector('.opt.selected');
+        if (!sel) { toast('Select an option first'); return; }
+        userAns = sel.dataset.idx;
+        isCorrect = parseInt(userAns) === q.a;
+        document.querySelectorAll('.opt').forEach(o => {
+          o.classList.add('disabled');
+          if (parseInt(o.dataset.idx) === q.a) o.classList.add('correct');
+          else if (o === sel && !isCorrect) o.classList.add('wrong');
+        });
+      } else if (q.type === 'tf') {
+        const sel = document.querySelector('.opt.selected');
+        if (!sel) { toast('Select True or False'); return; }
+        userAns = sel.dataset.val;
+        isCorrect = (userAns === 'true') === q.a;
+        document.querySelectorAll('.opt').forEach(o => {
+          o.classList.add('disabled');
+          const val = o.dataset.val === 'true';
+          if (val === q.a) o.classList.add('correct');
+          else if (o === sel && !isCorrect) o.classList.add('wrong');
+        });
+      } else {
+        const input = document.getElementById('fill-ans');
+        userAns = input.value;
+        if (!userAns.trim()) { toast('Type an answer first'); return; }
+        const norm = normalize(userAns);
+        isCorrect = q.a.some(ans => {
+          const a = normalize(ans);
+          return norm === a || norm.includes(a) || a.includes(norm);
+        });
+        input.classList.add(isCorrect ? 'correct' : 'wrong');
+        input.disabled = true;
+      }
+
+      session.answered = true;
+      state.totalAttempted++;
+      if (isCorrect) {
+        session.correct++;
+        state.totalCorrect++;
+        state.streak++;
+        state.xp += 10 + Math.min(state.streak, 5);
+        state.missed = state.missed.filter(id => id !== q.id);
+      } else {
+        state.streak = 0;
+        if (!state.missed.includes(q.id)) state.missed.push(q.id);
+      }
+      saveState();
+
+      const fb = document.getElementById('feedback');
+      fb.className = 'feedback show ' + (isCorrect ? 'ok' : 'bad');
+      if (isCorrect) {
+        fb.innerHTML = '✓ Correct';
+      } else {
+        let correctStr = '';
+        if (q.type === 'mcq') correctStr = q.opts[q.a];
+        else if (q.type === 'tf') correctStr = q.a ? 'True' : 'False';
+        else correctStr = q.a[0];
+        fb.innerHTML = '✗ Incorrect<div class="ans">Answer: ' + correctStr + '</div>';
+      }
+
+      document.getElementById('btn-check').style.display = 'none';
+      document.getElementById('btn-next').style.display = 'inline-block';
+    }
+
+    function nextQuestion() {
+      session.idx++;
+      renderQuestion();
+    }
+
+    function endQuiz() {
+      clearInterval(session.timer);
+      const total = session.queue.length;
+      const score = total ? Math.round((session.correct / total) * 100) : 0;
+      document.getElementById('final-score').textContent = score + '%';
+      document.getElementById('final-detail').textContent = `${session.correct} correct out of ${total}`;
+      const gained = session.correct * 10;
+      document.getElementById('xp-gain').textContent = `+${gained} XP this session`;
+      showScreen('results');
+    }
+
+    function retrySession() {
+      session.idx = 0;
+      session.correct = 0;
+      session.answered = false;
+      if (session.mode === 'exam') {
+        session.timeLeft = 40 * 60;
+        startTimer();
+      }
+      showScreen('quiz');
+      renderQuestion();
+    }
+
+    function toast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 1800);
+    }
+
+    // init
+    loadState();
+  </script>
+</body>
+</html>
